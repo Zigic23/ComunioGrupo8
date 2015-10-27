@@ -1,5 +1,4 @@
 package com.example.pdred.practicaps_final;
-
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
