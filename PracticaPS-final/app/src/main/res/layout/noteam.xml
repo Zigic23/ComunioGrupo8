@@ -8,26 +8,31 @@
     android:background="#29b716">
     tools:context=".EquipoActivity">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView1"
-        android:layout_below="@+id/textView"
-        android:layout_marginLeft="15dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mi Equipo"
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/listView1"
         android:layout_marginLeft="90dp"
         android:textColor="#b1ffffff"
         android:textSize="30dp"
         android:longClickable="false"
         android:linksClickable="false"
-        style="@style/AppTheme" />
+        style="@style/AppTheme"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Usted no tiene ningun jugador"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:textSize="50dp"
+        android:layout_marginLeft="20dp" />
 </RelativeLayout>

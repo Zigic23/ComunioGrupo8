@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="#FFFFFF">
 
     <ImageView
         android:id="@+id/imageView_imagen"
@@ -10,7 +11,7 @@
         android:layout_height="80dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:contentDescription="Descripción del contenido de la imagen"
+        android:contentDescription="Imagen del jugador"
         android:src="@android:drawable/ic_menu_gallery" />
 
     <LinearLayout
@@ -25,7 +26,8 @@
             android:layout_height="wrap_content"
             android:text="Nombre"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_gravity="left"/>
+            android:layout_gravity="left"
+            android:layout_marginLeft="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,7 +35,8 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Posicion"
             android:id="@+id/textView2"
-            android:layout_gravity="right" />
+            android:layout_gravity="right"
+            android:layout_marginRight="5dp" />
 
         <TextView
             android:id="@+id/textView_inferior"
@@ -41,7 +44,8 @@
             android:layout_height="wrap_content"
             android:text="Precio"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_gravity="right"/>
+            android:layout_gravity="right"
+            android:layout_marginRight="5dp" />
 
     </LinearLayout>
 
