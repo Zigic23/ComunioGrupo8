@@ -1,4 +1,4 @@
-package com.example.zigic.test3;
+package com.example.pdred.practicaps_final;
 
 /**
  * Created by Zigic on 26/10/2015.

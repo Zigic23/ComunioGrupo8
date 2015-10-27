@@ -1,4 +1,4 @@
-package com.example.zigic.test3;
+package com.example.pdred.practicaps_final;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
