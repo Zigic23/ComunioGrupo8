@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/mi_perfil" android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="Mi Perfil"/>
+        <item android:id="@+id/mi_equipo" android:icon="@android:drawable/ic_menu_directions"
+            android:title="Mi Equipo" />
+        <item android:id="@+id/mi_liga" android:icon="@android:drawable/ic_menu_set_as"
+            android:title="Mi Liga" />
+        <item android:id="@+id/mi_mercado" android:icon="@android:drawable/ic_menu_search"
+            android:title="Mercado" />
+    </group>
+
+</menu>
