@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log In"
-        android:id="@+id/button"
+        android:id="@+id/buttonLogIn"
         android:layout_below="@+id/editText2"
         android:layout_alignLeft="@+id/editText2"
         android:layout_alignStart="@+id/editText2" />
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:id="@+id/button2"
+        android:id="@+id/buttonSignUp"
         android:layout_below="@+id/editText2"
         android:layout_alignRight="@+id/editText2"
         android:layout_alignEnd="@+id/editText2" />
