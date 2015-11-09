@@ -17,6 +17,7 @@ public class Jugador {
     String posicion;
     int precio;
     int puntos;
+    String user;
 
     public Jugador (int iid, String nomjug, String pos, int prec,int puntos){
         imagenId = iid;
@@ -54,8 +55,17 @@ public class Jugador {
             case 17: id = R.drawable.jugador17; break;
             case 18: id = R.drawable.jugador18; break;
             case 19: id = R.drawable.jugador19; break;
+            case 67: id = R.drawable.filipeluis; break;
             default: id = R.drawable.avatar;
         }
         this.imagenId = id;
+    }
+
+    public String getUser(){
+        return this.user;
+    }
+
+    public void setUser(String us){
+        this.user = us;
     }
 }
