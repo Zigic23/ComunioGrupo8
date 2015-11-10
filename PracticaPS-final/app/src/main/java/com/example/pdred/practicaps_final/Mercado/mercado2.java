@@ -27,13 +27,12 @@ import static com.example.pdred.practicaps_final.MetodosIO.getAllLines;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
 
 public class mercado2 extends AppCompatActivity {
-    private ListView lista;
+    ListView listView44;
     ArrayList<Jugador> enVenta;
     ArrayList<String> jugadores;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lista = (ListView) findViewById(R.id.listView1);
         String comun = getCurrentUser().getNombreLiga();
         try {
             createAsyncTask(comun);
@@ -47,17 +46,19 @@ public class mercado2 extends AppCompatActivity {
             setContentView(R.layout.noplayers);
         } else {
             setContentView(R.layout.activity_mercado2);
+            listView44  = (ListView) findViewById(R.id.listViewMercado);
             setAll(enVenta);
         }
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position,
-                                    long arg3) {
-                String value = (String) adapter.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(),"pene" + value, Toast.LENGTH_SHORT);
-            }
+        /**listView44.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapter, View v, int position,
+        long arg3) {
+        String value = (String) adapter.getItemAtPosition(position);
+        Toast.makeText(getApplicationContext(),"pene" + value, Toast.LENGTH_SHORT);
+        }
         });
+         */
     }
 
 
@@ -131,16 +132,14 @@ public class mercado2 extends AppCompatActivity {
         String posicion = jugadorItems[1];
         int precio = Integer.parseInt(jugadorItems[2].replace(" ",""));
         int idImagen = Integer.parseInt(jugadorItems[3].replace(" ",""));
-        String user = jugadorItems[4];
 
         Jugador player = new Jugador(0,nombreJugador,posicion,precio,0);
         player.setImagenId(idImagen);
-        player.setUser(user);
         return player;
     }
 
     public void setAll (ArrayList<Jugador> listac) {
-        lista.setAdapter(new Lista_adaptador_Mercado(this, R.layout.entrada, listac) {
+        listView44.setAdapter(new Lista_adaptador_Mercado(this, R.layout.entrada, listac) {
             @Override
             public void onEntrada(Object entrada, View view) {
                 TextView texto_nombre = (TextView) view.findViewById(R.id.textView_superior);

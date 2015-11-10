@@ -17,7 +17,6 @@ public class Jugador {
     String posicion;
     int precio;
     int puntos;
-    String user;
 
     public Jugador (int iid, String nomjug, String pos, int prec,int puntos){
         imagenId = iid;
@@ -61,11 +60,4 @@ public class Jugador {
         this.imagenId = id;
     }
 
-    public String getUser(){
-        return this.user;
-    }
-
-    public void setUser(String us){
-        this.user = us;
-    }
 }
