@@ -54,8 +54,10 @@ public class Jugador {
             case 17: id = R.drawable.jugador17; break;
             case 18: id = R.drawable.jugador18; break;
             case 19: id = R.drawable.jugador19; break;
+            case 67: id = R.drawable.jugador67; break;
             default: id = R.drawable.avatar;
         }
         this.imagenId = id;
     }
+
 }
