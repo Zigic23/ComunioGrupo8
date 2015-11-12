@@ -12,6 +12,7 @@ package com.example.pdred.practicaps_final.Login;
     import com.example.pdred.practicaps_final.Main_Menu.MainActivity;
     import com.example.pdred.practicaps_final.R;
     import com.example.pdred.practicaps_final.Registro.Registro;
+    import com.example.pdred.practicaps_final.Registro.registroComunidad;
 
     import java.io.IOException;
     import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.getHtml;
@@ -33,7 +34,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent nuevaActividad;
-                nuevaActividad = new Intent(LoginActivity.this, Registro.class);
+                nuevaActividad = new Intent(LoginActivity.this, registroComunidad.class);
                 startActivity(nuevaActividad);
             }
         });

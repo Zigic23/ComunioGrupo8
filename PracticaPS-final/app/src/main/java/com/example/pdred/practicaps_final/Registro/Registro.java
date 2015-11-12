@@ -13,10 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pdred.practicaps_final.Main_Menu.MainActivity;
 import com.example.pdred.practicaps_final.R;
+import com.example.pdred.practicaps_final.UsuarioEstatico;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,6 +42,9 @@ public class Registro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        UsuarioEstatico a = new UsuarioEstatico();
+        TextView tVNombreComunidad = (TextView) findViewById(R.id.tVComunidad);
+        tVNombreComunidad.setText("Comunidad: "+a.getCurrentComunidad());
         Button bValidar = (Button) findViewById(R.id.bValidar);
         bValidar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +61,7 @@ public class Registro extends AppCompatActivity {
                 String password1= ((EditText)findViewById(R.id.eTPass1)).getText().toString();
                 String password2= ((EditText)findViewById(R.id.eTPass2)).getText().toString();
                 String equipo= ((EditText)findViewById(R.id.eTNombreEquipo)).getText().toString();
-                String comunidad = ((EditText) findViewById(R.id.eTComunidad)).getText().toString();
+
                 if(nombreValido){
                     if (password1.equals(password2)){
                         new asynRegistrar().execute(usuario,password1,equipo);

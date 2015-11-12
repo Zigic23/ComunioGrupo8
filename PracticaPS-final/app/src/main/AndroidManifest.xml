@@ -41,6 +41,8 @@
         </activity>
         <activity android:name=".Mercado.mercado2" >
         </activity>
+        <activity android:name=".Registro.registroComunidad" >
+        </activity>
     </application>
 
 </manifest>

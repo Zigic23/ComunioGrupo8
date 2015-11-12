@@ -18,6 +18,25 @@ import static com.example.pdred.practicaps_final.MetodosIO.getLine;
  */
 public class UsuarioEstatico {
     static Usuario currentUser;
+    static String currentComunidad;
+    static boolean comunidadNueva;
+
+    public static boolean isComunidadNueva() {
+        return comunidadNueva;
+    }
+
+    public static void setComunidadNueva(boolean comunidadNueva) {
+        UsuarioEstatico.comunidadNueva = comunidadNueva;
+    }
+
+    public static String getCurrentComunidad() {
+        return currentComunidad;
+    }
+
+    public static void setCurrentComunidad(String currentComunidad) {
+        UsuarioEstatico.currentComunidad = currentComunidad;
+    }
+
 
     public static Usuario getCurrentUser() {
         return currentUser;

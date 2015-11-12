@@ -138,17 +138,6 @@
         android:layout_alignRight="@+id/eTPass2"
         android:layout_alignEnd="@+id/eTPass2" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/eTComunidad"
-        android:inputType="text"
-        android:layout_below="@+id/tVComunidad"
-        android:layout_alignLeft="@+id/tVComunidad"
-        android:layout_alignStart="@+id/tVComunidad"
-        android:layout_alignRight="@+id/eTNombreEquipo"
-        android:layout_alignEnd="@+id/eTNombreEquipo" />
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
