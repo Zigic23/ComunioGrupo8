@@ -17,7 +17,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText4" />
+        android:layout_below="@+id/button10" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,4 +38,22 @@
         android:layout_alignStart="@+id/listView1"
         android:layout_alignRight="@+id/listView1"
         android:layout_alignEnd="@+id/listView1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver alineacion"
+        android:id="@+id/button10"
+        android:layout_below="@+id/editText4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar alineacion"
+        android:id="@+id/button3"
+        android:layout_above="@+id/listView1"
+        android:layout_alignLeft="@+id/listView1"
+        android:layout_alignStart="@+id/listView1" />
 </RelativeLayout>

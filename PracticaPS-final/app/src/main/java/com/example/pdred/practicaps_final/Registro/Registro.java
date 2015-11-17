@@ -16,9 +16,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pdred.practicaps_final.Main_Menu.MainActivity;
+import com.example.pdred.practicaps_final.Clases.Jugador;
+import com.example.pdred.practicaps_final.Login.LoginActivity;
 import com.example.pdred.practicaps_final.R;
-import com.example.pdred.practicaps_final.UsuarioEstatico;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,11 +27,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
-import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.getHtml;
-import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.setInfoUsuario;
-import static com.example.pdred.practicaps_final.UsuarioEstatico.iniciarSesion;
-import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
+import static com.example.pdred.practicaps_final.Clases.Equipo.generarEquipoAleatorio;
+import static com.example.pdred.practicaps_final.Clases.Equipo.getIDs;
+import static com.example.pdred.practicaps_final.Clases.Equipo.parsearJugadores;
+import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentComunidad;
+import static com.example.pdred.practicaps_final.UsuarioEstatico.isComunidadNueva;
+import static com.example.pdred.practicaps_final.Utilidades.MetodosIO.getAllLines;
+import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setFichar;
+import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setRegistroComunidad;
+import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setRegistroEquipo;
+import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setRegistroNuevaComunidad;
 
 
 public class Registro extends AppCompatActivity {
@@ -42,9 +50,8 @@ public class Registro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-        UsuarioEstatico a = new UsuarioEstatico();
         TextView tVNombreComunidad = (TextView) findViewById(R.id.tVComunidad);
-        tVNombreComunidad.setText("Comunidad: "+a.getCurrentComunidad());
+        tVNombreComunidad.setText("Comunidad: "+getCurrentComunidad());
         Button bValidar = (Button) findViewById(R.id.bValidar);
         bValidar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,13 +99,32 @@ public class Registro extends AppCompatActivity {
             user=params[0];
             pass=params[1];
             equipo=params[2];
+            String comunidad = getCurrentComunidad();
             String respuesta = "ERROR AL REGISTRAR";
-            String urlRegistrar = "http://comunio.garcy.es/?funcion=registro&comunidad=1&usuario="+user+"&contraseña="+pass+"&equipo="+equipo;
+
             try{
                 // Obtenemos el HTML del registro -> Introduce nuevos datos en la base de datos
-                respuesta = getHtml(urlRegistrar);
-                // Creamos una sesion, creando un usuario estatico a partir del nombre de usuario y cargando su informacion
-                iniciarSesion(user);
+                if (isComunidadNueva()){ //Si la comunidad es nueva
+                    String urlRegistrarNueva = setRegistroNuevaComunidad(comunidad,user,pass,equipo);
+                    respuesta = getHtml(urlRegistrarNueva);
+                }else{ //Si la comunidad ya existe
+                    String urlRegistrar = setRegistroComunidad(comunidad,user,pass,equipo);
+                    respuesta = getHtml(urlRegistrar);
+                }
+                // AQUI GENERAMOS EL EQUIPO ALEATORIO
+                    String urlEquipo = setRegistroEquipo(comunidad);
+                    // Obtenemos como un Array de Strings todos los jugadores libres
+                    ArrayList<String> jugadores = getAllLines(urlEquipo);
+                    // Parseamos los jugadores al tipo Jugador
+                    ArrayList<Jugador> jugadoresLibres = parsearJugadores(jugadores);
+                    // Generamos un equipo aleatorio
+                    ArrayList<Jugador> equipoGenerado = generarEquipoAleatorio(jugadoresLibres);
+                    // Obtenemos el ID de los jugadores del equipo generado
+                    String fichajes = getIDs(equipoGenerado);
+                    // Los fichamos a todos
+                    String urlFichar = setFichar(user,fichajes);
+                    getHtml(urlFichar);
+
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -112,7 +138,7 @@ public class Registro extends AppCompatActivity {
                 Toast toastValidarError = Toast.makeText(getApplicationContext(),"REGISTRO COMPLETO",Toast.LENGTH_LONG);
                 toastValidarError.show();
                 Intent nuevaActividad;
-                nuevaActividad = new Intent(Registro.this, MainActivity.class);
+                nuevaActividad = new Intent(Registro.this, LoginActivity.class);
                 startActivity(nuevaActividad);
             }
         }
@@ -159,23 +185,9 @@ public class Registro extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public static String getHtml(String url) throws IOException {
-         // Construimos una conexion
+        // Construimos una conexion
         URL nuevaUrl = new URL(url);
         URLConnection conexion = nuevaUrl.openConnection();
 

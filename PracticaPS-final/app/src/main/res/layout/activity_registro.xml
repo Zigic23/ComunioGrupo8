@@ -16,7 +16,7 @@
         android:layout_alignLeft="@+id/tVNombreEquipo"
         android:layout_alignStart="@+id/tVNombreEquipo" />
 
-   <RadioButton
+    <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fichar mi propio Equipo"
@@ -156,11 +156,11 @@
             android:layout_gravity="center_horizontal|bottom" />
 
         <Button
-           style="?android:attr/buttonStyleSmall"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Validar"
-           android:id="@+id/bValidar"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Validar"
+            android:id="@+id/bValidar"
             android:layout_marginLeft="65dp"
             android:layout_marginStart="65dp"
             android:layout_below="@+id/tVNombre"

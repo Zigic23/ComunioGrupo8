@@ -10,8 +10,6 @@
             android:title="Mi Liga" />
         <item android:id="@+id/mi_mercado" android:icon="@android:drawable/ic_menu_search"
             android:title="Mercado" />
-        <item android:id="@+id/cerrar_sesion"
-            android:title="Cerrar Sesión" />
     </group>
 
 </menu>

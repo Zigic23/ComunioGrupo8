@@ -8,165 +8,36 @@
     tools:context="com.example.pdred.practicaps_final.Mercado.Mercado"
     android:background="#ffffff">
 
-    <FrameLayout
-        style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:background="@color/secondary_text_default_material_light"
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewMercado"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editText4" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText4"
+        android:text="    Mercado"
+        android:textColor="#00014b"
+        android:textIsSelectable="false"
+        android:textStyle="bold"
+        android:shadowRadius="1.5"
+        android:shadowDx="1"
+        android:shadowDy="2"
         android:layout_alignParentTop="true"
+        android:background="@drawable/rounded_edittext4"
+        android:layout_gravity="center"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/frameLayout" >
+        android:layout_alignRight="@+id/listViewMercado"
+        android:layout_alignEnd="@+id/listViewMercado"
+        android:textSize="56sp" />
 
-        <EditText
-            style="@style/Base.TextAppearance.AppCompat.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText4"
-            android:text="Mercado"
-            android:textColor="@color/abc_primary_text_material_dark"
-            android:textSize="@dimen/notification_large_icon_width"
-            android:textIsSelectable="false"
-            android:textStyle="bold"
-            android:shadowColor="@color/dim_foreground_disabled_material_dark"
-            android:shadowRadius="1.5"
-            android:shadowDx="1"
-            android:shadowDy="2"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="@color/abc_primary_text_disable_only_material_dark"
-            android:layout_gravity="center" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/frameLayout">
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="391dp"
-            android:layout_gravity="center">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"></TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/design_tab_max_width"></TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text=" JUGADOR"
-                    android:id="@+id/textView"
-                    android:layout_column="2"
-                    android:textColor="#000000"
-                    android:background="#54ffffff"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/textView2"
-                    android:layout_column="3"
-                    android:background="#53ffffff" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="VALOR"
-                    android:id="@+id/textView3"
-                    android:layout_column="4"
-                    android:textColor="#010000"
-                    android:background="#54ffffff"
-                    android:textIsSelectable="false"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/textView4"
-                    android:layout_column="5"
-                    android:background="#53ffffff" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FECHA FINAL"
-                    android:id="@+id/textView8"
-                    android:layout_column="6"
-                    android:background="#55ffffff"
-                    android:textSize="20dp"
-                    android:textColor="#000000" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/textView6"
-                    android:layout_column="2" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Jugador 1"
-                    android:id="@+id/textView7"
-                    android:layout_column="2" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </TableRow>
-
-        </TableLayout>
-    </FrameLayout>
 </RelativeLayout>

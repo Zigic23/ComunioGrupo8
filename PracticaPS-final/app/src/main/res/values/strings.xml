@@ -22,4 +22,10 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_perfil2">Perfil</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_equipo_activity2">equipo_activity2</string>
+    <string name="title_activity_equipo2">Equipo2</string>
+    <string name="title_activity_alineacion">Alineacion</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="Convocado">Convocado</string>
 </resources>

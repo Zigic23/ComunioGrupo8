@@ -22,7 +22,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class registroComunidad extends AppCompatActivity {
+import static com.example.pdred.practicaps_final.UsuarioEstatico.setComunidadNueva;
+import static com.example.pdred.practicaps_final.UsuarioEstatico.setCurrentComunidad;
+
+public class RegistroComunidad extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class registroComunidad extends AppCompatActivity {
     class asyncComunidad extends AsyncTask<String,String,String> {
         String comunidad;
         protected void OnPreExecute(){
-            ProgressDialog pDialog = new ProgressDialog(registroComunidad.this);
+            ProgressDialog pDialog = new ProgressDialog(RegistroComunidad.this);
             pDialog.setMessage("VALIDANDO COMUNIDAD...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -71,10 +74,9 @@ public class registroComunidad extends AppCompatActivity {
         protected void onPostExecute (String result){
             if (result.equals("EXISTE")){
                 Intent nuevaActividad;
-                nuevaActividad = new Intent(registroComunidad.this, Registro.class);
-                UsuarioEstatico a = new UsuarioEstatico();
-                a.setCurrentComunidad(comunidad);
-                a.setComunidadNueva(false);
+                nuevaActividad = new Intent(RegistroComunidad.this, Registro.class);
+                setCurrentComunidad(comunidad);
+                setComunidadNueva(false);
                 startActivity(nuevaActividad);
                 //Toast toastValidar = Toast.makeText(getApplicationContext(),"ERROR AL UNIRSE A LA COMUNIDAD",Toast.LENGTH_SHORT);
                 //toastValidar.show();
@@ -90,7 +92,7 @@ public class registroComunidad extends AppCompatActivity {
     class asyncNuevaComunidad extends AsyncTask<String,String,String> {
         String comunidad;
         protected void OnPreExecute(){
-            ProgressDialog pDialog = new ProgressDialog(registroComunidad.this);
+            ProgressDialog pDialog = new ProgressDialog(RegistroComunidad.this);
             pDialog.setMessage("VALIDANDO COMUNIDAD...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -114,10 +116,10 @@ public class registroComunidad extends AppCompatActivity {
             if (result.equals("ERROR")){
 
                 Intent nuevaActividad;
-                nuevaActividad = new Intent(registroComunidad.this, Registro.class);
+                nuevaActividad = new Intent(RegistroComunidad.this, Registro.class);
                 UsuarioEstatico a = new UsuarioEstatico();
-                a.setCurrentComunidad(comunidad);
-                a.setComunidadNueva(true);
+                setCurrentComunidad(comunidad);
+                setComunidadNueva(true);
                 startActivity(nuevaActividad);
 
             }else{
@@ -149,4 +151,3 @@ public class registroComunidad extends AppCompatActivity {
         }else{return html.toString();}
     }
 }
-

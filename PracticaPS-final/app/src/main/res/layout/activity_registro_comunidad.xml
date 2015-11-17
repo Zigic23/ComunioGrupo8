@@ -52,5 +52,4 @@
         android:background="#7b070707"
         android:textStyle="bold|italic"
         />
-
 </RelativeLayout>

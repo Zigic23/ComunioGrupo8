@@ -12,16 +12,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.pdred.practicaps_final.Equipo.EquipoActivity;
-import com.example.pdred.practicaps_final.Liga_Comunidad.mi_liga2;
-import com.example.pdred.practicaps_final.Perfil.mi_perfil2;
+import com.example.pdred.practicaps_final.Equipo.MiEquipo;
+import com.example.pdred.practicaps_final.Liga_Comunidad.MiLiga;
+import com.example.pdred.practicaps_final.Login.LoginActivity;
+import com.example.pdred.practicaps_final.Perfil.MiPerfil;
 import com.example.pdred.practicaps_final.R;
-import com.example.pdred.practicaps_final.Mercado.mercado2;
+import com.example.pdred.practicaps_final.Mercado.Mercado;
 
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Inicio extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,20 +60,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -82,20 +69,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.mi_perfil) {
             Intent nuevaActividad;
-            nuevaActividad = new Intent(MainActivity.this, mi_perfil2.class);
+            nuevaActividad = new Intent(Inicio.this, MiPerfil.class);
             startActivity(nuevaActividad);
         } else if (id == R.id.mi_equipo) {
             Intent nuevaActividad;
-            nuevaActividad = new Intent(MainActivity.this, EquipoActivity.class);
+            nuevaActividad = new Intent(Inicio.this, MiEquipo.class);
             startActivity(nuevaActividad);
 
         } else if (id == R.id.mi_liga) {
             Intent nuevaActividad;
-            nuevaActividad = new Intent(MainActivity.this,mi_liga2.class);
+            nuevaActividad = new Intent(Inicio.this,MiLiga.class);
             startActivity(nuevaActividad);
         } else if (id == R.id.mi_mercado) {
             Intent nuevaActividad;
-            nuevaActividad = new Intent(MainActivity.this, mercado2.class);
+            nuevaActividad = new Intent(Inicio.this, Mercado.class);
+            startActivity(nuevaActividad);
+        } else if (id == R.id.cerrar_sesion) {
+            Intent nuevaActividad;
+            nuevaActividad = new Intent(Inicio.this, LoginActivity.class);
             startActivity(nuevaActividad);
 
         }
