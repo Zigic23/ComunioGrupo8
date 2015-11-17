@@ -29,14 +29,6 @@
             android:layout_gravity="left"
             android:layout_marginLeft="5dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Equipo"
-            android:id="@+id/textView_Equipo"
-            android:layout_gravity="right"
-            android:layout_marginRight="5dp" />
 
         <TextView
             android:id="@+id/textView_Puntos"

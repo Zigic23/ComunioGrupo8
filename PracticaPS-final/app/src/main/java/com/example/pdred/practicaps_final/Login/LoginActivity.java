@@ -9,14 +9,16 @@ package com.example.pdred.practicaps_final.Login;
     import android.widget.Toast;
     import android.app.ProgressDialog;
 
-    import com.example.pdred.practicaps_final.Main_Menu.MainActivity;
+    import com.example.pdred.practicaps_final.Main_Menu.Inicio;
     import com.example.pdred.practicaps_final.R;
-    import com.example.pdred.practicaps_final.Registro.Registro;
+    import com.example.pdred.practicaps_final.Registro.RegistroComunidad;
 
     import java.io.IOException;
+
+    import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.checklogindata;
     import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.getHtml;
-    import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.setUsuarioContrasena;
     import static com.example.pdred.practicaps_final.UsuarioEstatico.iniciarSesion;
+    import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setUsuarioContrasena;
 
 
 public class LoginActivity extends Activity {
@@ -33,7 +35,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent nuevaActividad;
-                nuevaActividad = new Intent(LoginActivity.this, Registro.class);
+                nuevaActividad = new Intent(LoginActivity.this, RegistroComunidad.class);
                 startActivity(nuevaActividad);
             }
         });
@@ -44,7 +46,8 @@ public class LoginActivity extends Activity {
                 String usuario = ((EditText) findViewById(R.id.editText)).getText().toString();
                 String password = ((EditText) findViewById(R.id.editText2)).getText().toString();
                 // Crea un background, pasandole los datos que vamos a necesitar (Todos los que queramos)
-                new asynclogin().execute(usuario, password);
+                if (checklogindata(usuario,password)){
+                new asynclogin().execute(usuario, password);} else err_login();
             }
         });
     }
@@ -77,7 +80,7 @@ public class LoginActivity extends Activity {
                 //Realiza la peticion al PHP, si es correcta devolvera el contenido del HTML
                 respuesta = getHtml(url);
                 // Creamos una sesion, creando un usuario estatico a partir del nombre de usuario y cargando su informacion
-                iniciarSesion(user);
+                if (!respuesta.equals("ERROR")){iniciarSesion(user);}
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -90,7 +93,7 @@ public class LoginActivity extends Activity {
             if (result.equals("OK")){
                 // Avanzamos al main
                 Intent nuevaActividad;
-                nuevaActividad = new Intent(LoginActivity.this, MainActivity.class);
+                nuevaActividad = new Intent(LoginActivity.this, Inicio.class);
                 startActivity(nuevaActividad);
             } else {err_login();} //En caso contrario sacara un error por pantalla
             pDialog.hide();

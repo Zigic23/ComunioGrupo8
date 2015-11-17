@@ -3,10 +3,6 @@
     package="com.example.pdred.practicaps_final" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -21,11 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Equipo.EquipoActivity" />
+        <activity android:name=".Equipo.MiEquipo" />
         <activity
-            android:name=".Main_Menu.MainActivity"
-            android:label="@string/title_activity_main"
+            android:name=".Main_Menu.Inicio"
+            android:label="Inicio"
             android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".Registro.Registro" >
         </activity>
         <activity android:name=".Perfil.MiPerfil" >
         </activity>
@@ -33,13 +31,9 @@
         </activity>
         <activity android:name=".Mercado.Mercado" >
         </activity>
-        <activity android:name=".Registro.Registro" >
+        <activity android:name=".Registro.RegistroComunidad" >
         </activity>
-        <activity android:name=".Perfil.mi_perfil2" >
-        </activity>
-        <activity android:name=".Liga_Comunidad.mi_liga2" >
-        </activity>
-        <activity android:name=".Mercado.mercado2" >
+        <activity android:name=".Equipo.AlineacionEquipo" >
         </activity>
     </application>
 

@@ -1,4 +1,4 @@
-package com.example.pdred.practicaps_final;
+package com.example.pdred.practicaps_final.Utilidades;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -50,12 +50,13 @@ public class MetodosIO {
         // Leemos, como un String
         try (InputStream in = conexion.getInputStream()) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String primera = reader.readLine();
             // Si la primera linea esta vacia, a fregar
-            String posicion1 = reader.readLine();
-            if (!(posicion1.isEmpty())){
-                lineas.add(posicion1);
+            if (!( primera == null)){
+                lineas.add(primera);
                 for (String line; (line = reader.readLine()) != null; ) {
-                lineas.add(line);}}
+                    lineas.add(i,line);
+                    i++;}}
         }catch (IOException e) {}
         return lineas;
     }
