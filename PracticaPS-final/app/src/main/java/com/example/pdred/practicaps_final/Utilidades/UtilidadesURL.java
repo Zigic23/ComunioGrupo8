@@ -21,6 +21,14 @@ public class UtilidadesURL {
 
     // GENERADOR DE URL's PARA EL REGISTRO
 
+    public static String setValidarUsuario(String user){
+        return "http://comunio.garcy.es/?funcion=validarUsuario&usuario="+user;
+    }
+
+    public static String setExisteComunidad(String comunidad){
+        return "http://comunio.garcy.es/?funcion=validarComunidad&comunidad="+comunidad;
+    }
+
     public static String setRegistroComunidad(String comunidad, String user, String pass, String equipo){
         String comunidad2 =comunidad.replace(' ','_');
         return "http://comunio.garcy.es/?funcion=registroPorComunidad&comunidad="+comunidad2+"&usuario="+user+"&contraseña="+pass+"&equipo="+equipo;

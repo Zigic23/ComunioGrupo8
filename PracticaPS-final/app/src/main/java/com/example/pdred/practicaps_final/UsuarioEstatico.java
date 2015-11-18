@@ -20,19 +20,18 @@ import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setInf
  * Created by Michel on 30/10/2015.
  */
 public class UsuarioEstatico {
+    // Guarda durante la ejecuccion del programa el usuario que se le introduce en el LOGIN
     static Usuario currentUser;
+    // Guarda la comunidad entre las actividades del REGISTRO
     static String currentComunidad;
+    // Guarda explicitamente si la comunidad a la que te unes es nueva o no entre las actividades del REGISTRO
     static boolean comunidadNueva;
+    // Guarda los usuarios de una comunidad al arracar la sesion para la actividad LIGA
     static  ArrayList<Usuario> usuariosLiga;
+    // Guarda en ejecuccion la alineacion que tengas
     static Alineacion alineacion;
 
-    public static Usuario getCurrentUser() {
-        return currentUser;
-    }
-    public static void setCurrentUser(Usuario currentUser) {
-        UsuarioEstatico.currentUser = currentUser;
-    }
-
+    // Inicializa variables estaticas en el LOGIN
     public static void iniciarSesion(String user) throws IOException {
         // Genera una URL válida para consultar los datos de un usuario
         String url = setInfoUsuario(user);
@@ -41,8 +40,9 @@ public class UsuarioEstatico {
         String puntos = getLine(url, 1);
         String presupuesto = getLine(url, 2);
         String comunidad = getLine(url, 3);
+        // Genra una nueva alineacion (HAY QUE ACTUALIZARLO PARA QUE SE CARGUE EN FUNCION DEL CAMPO JUEGA DE CADA JUGADOR)
         alineacion = new Alineacion();
-        // Obtiene los jugadores del equipo del usuario
+        // Obtiene los jugadores del equipo del usuario (SIGUE EL EQUIPO POR DEFECTO)
         Equipo equipo = setEquipoPruebas(); //PRUEBAS
         String url2 = setFuncionEquipo(user);
         ArrayList<String> jugadores = getAllLines(url2);
@@ -50,57 +50,20 @@ public class UsuarioEstatico {
         // Parsea los tipos incompatibles
         int presupuestoP = Integer.parseInt(presupuesto);
         int puntosP = Integer.parseInt(puntos);
-        // Cargar a tus compañeros de ocmunidad
+        // Cargar a tus compañeros de comunidad
         usuariosLiga = cargarComunidad(comunidad);
         // Crea un nuevo usuario en la aplicación a partir de esta información
         Usuario newUser = new Usuario(user,comunidad,presupuestoP,puntosP,equipo);
         setCurrentUser(newUser);
     }
 
-    //A partir de aquí es unicamente para pruebas
 
-    public static Equipo setEquipoPruebas(){
-        Equipo newTeam = new Equipo("NewTeam",0,0,setJugadoresPruebas());
-        newTeam.actualizarValorSuma();
-        return newTeam;
+    public static Usuario getCurrentUser() {
+        return currentUser;
     }
+    public static void setCurrentUser(Usuario currentUser) {UsuarioEstatico.currentUser = currentUser;}
 
-    public static  ArrayList<Usuario> cargarComunidad(String comunidad) throws IOException {
-        String url = setComunidad(comunidad);
-        ArrayList<String> usuariosS = getAllLines(url);
-        ArrayList<Usuario> usuarios = cargarUsuarios(usuariosS);
-        //ordenar los usuarios por sus puntos (implementar este metodo en la clase usuario)
-        return usuarios;
-    }
 
-    public static ArrayList<Jugador> setJugadoresPruebas(){
-        Jugador jugador1 = new Jugador(R.drawable.neymar,"Neymar", "Delantero", 6000000,1,"POR DEFECTO");
-        Jugador jugador2 = new Jugador(R.drawable.nolito,"Nolito", "Delantero", 2000000,1,"POR DEFECTO");
-        Jugador jugador3 = new Jugador(R.drawable.cristiano,"Cristiano Ronaldo", "Delantero", 8000000,1,"POR DEFECTO");
-        Jugador jugador4 = new Jugador(R.drawable.reyes,"Reyes", "Medio", 2000000,1,"POR DEFECTO");
-        Jugador jugador5 = new Jugador(R.drawable.koke,"Koke", "Medio", 4000000,1,"POR DEFECTO");
-        Jugador jugador6 = new Jugador(R.drawable.tonikross,"Toni Kroos", "Medio", 5000000,1,"POR DEFECTO");
-        Jugador jugador7 = new Jugador(R.drawable.iconcono,"Arbeloa", "Defensa", 999999999,1,"POR DEFECTO");
-        Jugador jugador8 = new Jugador(R.drawable.pique,"Pique", "Defensa", 3000000,1,"POR DEFECTO");
-        Jugador jugador9 = new Jugador(R.drawable.demarcos,"De Marcos", "Defensa", 2000000,1,"POR DEFECTO");
-        Jugador jugador10 = new Jugador(R.drawable.rami,"Rami", "Defensa", 1000000,1,"POR DEFECTO");
-        Jugador jugador11 = new Jugador(R.drawable.keylornavas,"Keylor Navas", "Portero", 2000000,1,"POR DEFECTO");
-
-        ArrayList<Jugador> nuevaPlantilla = new ArrayList<>();
-        nuevaPlantilla.add(jugador1);
-        nuevaPlantilla.add(jugador2);
-        nuevaPlantilla.add(jugador3);
-        nuevaPlantilla.add(jugador4);
-        nuevaPlantilla.add(jugador5);
-        nuevaPlantilla.add(jugador6);
-        nuevaPlantilla.add(jugador7);
-        nuevaPlantilla.add(jugador8);
-        nuevaPlantilla.add(jugador9);
-        nuevaPlantilla.add(jugador10);
-        nuevaPlantilla.add(jugador11);
-
-        return nuevaPlantilla;
-    }
 
     public static String getCurrentComunidad() {
         return currentComunidad;
@@ -125,4 +88,53 @@ public class UsuarioEstatico {
     public static Alineacion getAlineacion() {
         return alineacion;
     }
+
+    // Carga los usuarios de la comunidad del usuario introducido en el LOGIN
+    public static  ArrayList<Usuario> cargarComunidad(String comunidad) throws IOException {
+        String url = setComunidad(comunidad);
+        ArrayList<String> usuariosS = getAllLines(url);
+        ArrayList<Usuario> usuarios = cargarUsuarios(usuariosS);
+        //ordenar los usuarios por sus puntos (implementar este metodo en la clase usuario)
+        return usuarios;
+    }
+
+    //A partir de aquí es unicamente para pruebas (ELIMINAR)
+
+        // Genera un equipo de pruebas
+        public static Equipo setEquipoPruebas(){
+            Equipo newTeam = new Equipo("NewTeam",0,0,setJugadoresPruebas());
+            newTeam.actualizarValorSuma();
+            return newTeam;
+        }
+
+        // Genera los jugadores de pruebas
+        public static ArrayList<Jugador> setJugadoresPruebas(){
+            Jugador jugador1 = new Jugador(R.drawable.neymar,"Neymar", "Delantero", 6000000,1,"POR DEFECTO");
+            Jugador jugador2 = new Jugador(R.drawable.nolito,"Nolito", "Delantero", 2000000,1,"POR DEFECTO");
+            Jugador jugador3 = new Jugador(R.drawable.cristiano,"Cristiano Ronaldo", "Delantero", 8000000,1,"POR DEFECTO");
+            Jugador jugador4 = new Jugador(R.drawable.reyes,"Reyes", "Medio", 2000000,1,"POR DEFECTO");
+            Jugador jugador5 = new Jugador(R.drawable.koke,"Koke", "Medio", 4000000,1,"POR DEFECTO");
+            Jugador jugador6 = new Jugador(R.drawable.tonikross,"Toni Kroos", "Medio", 5000000,1,"POR DEFECTO");
+            Jugador jugador7 = new Jugador(R.drawable.iconcono,"Arbeloa", "Defensa", 999999999,1,"POR DEFECTO");
+            Jugador jugador8 = new Jugador(R.drawable.pique,"Pique", "Defensa", 3000000,1,"POR DEFECTO");
+            Jugador jugador9 = new Jugador(R.drawable.demarcos,"De Marcos", "Defensa", 2000000,1,"POR DEFECTO");
+            Jugador jugador10 = new Jugador(R.drawable.rami,"Rami", "Defensa", 1000000,1,"POR DEFECTO");
+            Jugador jugador11 = new Jugador(R.drawable.keylornavas,"Keylor Navas", "Portero", 2000000,1,"POR DEFECTO");
+
+            ArrayList<Jugador> nuevaPlantilla = new ArrayList<>();
+            nuevaPlantilla.add(jugador1);
+            nuevaPlantilla.add(jugador2);
+            nuevaPlantilla.add(jugador3);
+            nuevaPlantilla.add(jugador4);
+            nuevaPlantilla.add(jugador5);
+            nuevaPlantilla.add(jugador6);
+            nuevaPlantilla.add(jugador7);
+            nuevaPlantilla.add(jugador8);
+            nuevaPlantilla.add(jugador9);
+            nuevaPlantilla.add(jugador10);
+            nuevaPlantilla.add(jugador11);
+
+            return nuevaPlantilla;
+        }
+
 }

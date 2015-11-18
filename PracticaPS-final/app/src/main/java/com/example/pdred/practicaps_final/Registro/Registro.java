@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import static com.example.pdred.practicaps_final.Clases.Equipo.generarEquipoAleatorio;
 import static com.example.pdred.practicaps_final.Clases.Equipo.getIDs;
 import static com.example.pdred.practicaps_final.Clases.Equipo.parsearJugadores;
+import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.getHtml;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentComunidad;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.isComunidadNueva;
 import static com.example.pdred.practicaps_final.Utilidades.MetodosIO.getAllLines;
@@ -39,6 +40,7 @@ import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setFic
 import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setRegistroComunidad;
 import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setRegistroEquipo;
 import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setRegistroNuevaComunidad;
+import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setValidarUsuario;
 
 
 public class Registro extends AppCompatActivity {
@@ -50,8 +52,10 @@ public class Registro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        // Informa al usuario de la comunidad a la que se va a unir
         TextView tVNombreComunidad = (TextView) findViewById(R.id.tVComunidad);
         tVNombreComunidad.setText("Comunidad: "+getCurrentComunidad());
+        // Recoje el boton validar del Layout y con la información que ha introducido el usuario (Nombre), comprueba si ya existe
         Button bValidar = (Button) findViewById(R.id.bValidar);
         bValidar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +64,7 @@ public class Registro extends AppCompatActivity {
                 new asyncValidar().execute(usuario);
             }
         });
+        // Recoje el boton del Layout y todos los campos del registro, que usa para crear un nuevo usuario
         Button bRegistrar = (Button) findViewById(R.id.bRegistrar);
         bRegistrar.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -68,16 +73,18 @@ public class Registro extends AppCompatActivity {
                 String password1= ((EditText)findViewById(R.id.eTPass1)).getText().toString();
                 String password2= ((EditText)findViewById(R.id.eTPass2)).getText().toString();
                 String equipo= ((EditText)findViewById(R.id.eTNombreEquipo)).getText().toString();
-
+                // Si el nombre es valido (comprobado)
                 if(nombreValido){
-                    if (password1.equals(password2)){
+                    // Si el usuario es valido, lo introduce a la base de daros
+                    if (password1.equals(password2)){ // Solo si las contraseñas son iguales
                         new asynRegistrar().execute(usuario,password1,equipo);
-                    }else{
+                    }else{ // Si no, muestra el error por pantalla
                         Toast toastRegistrar = Toast.makeText(getApplicationContext(),"Las contraseñas no coinciden",Toast.LENGTH_SHORT);
                         toastRegistrar.show();
                     }
                 }else{
-                    Toast toastValidar = Toast.makeText(getApplicationContext(),"Usuario no válido",Toast.LENGTH_SHORT);
+                    // Muestra si no se ha validad o el usuario no es valido
+                    Toast toastValidar = Toast.makeText(getApplicationContext(),"Valida tu usuario o usuario no válido",Toast.LENGTH_SHORT);
                     toastValidar.show();
                 }
             }
@@ -100,7 +107,7 @@ public class Registro extends AppCompatActivity {
             pass=params[1];
             equipo=params[2];
             String comunidad = getCurrentComunidad();
-            String respuesta = "ERROR AL REGISTRAR";
+            String respuesta = "ERROR";
 
             try{
                 // Obtenemos el HTML del registro -> Introduce nuevos datos en la base de datos
@@ -131,10 +138,12 @@ public class Registro extends AppCompatActivity {
             return respuesta;
         }
         protected void onPostExecute (String result){
-            if (result.equals("ERROR Al REGISTRAR")){
+            if (result.equals("ERROR")){
+                // Si la respuesta de la base de datos es ERROR, lo muestra por pantalla
                 Toast toastValidar = Toast.makeText(getApplicationContext(),"ERROR AL REGISTRAR",Toast.LENGTH_SHORT);
                 toastValidar.show();
             }else{
+                // Si no, informa al usuario de que ha terminado el registro y salta al LOGIN
                 Toast toastValidarError = Toast.makeText(getApplicationContext(),"REGISTRO COMPLETO",Toast.LENGTH_LONG);
                 toastValidarError.show();
                 Intent nuevaActividad;
@@ -157,8 +166,10 @@ public class Registro extends AppCompatActivity {
         protected String doInBackground(String... params){
             user = params[0];
             String respuesta = "ERROR VALIDAR";
-            String urlValidar = "http://comunio.garcy.es/?funcion=validarUsuario&usuario="+user;
+            String urlValidar = setValidarUsuario(user);
+
             try {
+                // Pide una respuesta a la base de datos
                 respuesta = getHtml(urlValidar);
             } catch (IOException e){
                 e.printStackTrace();
@@ -167,10 +178,12 @@ public class Registro extends AppCompatActivity {
         }
         protected void onPostExecute (String result){
             if (result.equals("EXISTE")){
+                // Si existe, pone nombre valido a false
                 nombreValido=false;
                 Toast toastValidar = Toast.makeText(getApplicationContext(),"Usuario no válido. Pulse Validar de neuvo",Toast.LENGTH_SHORT);
                 toastValidar.show();
             }else{
+                // Si no existe, pone nombre válido a true
                 nombreValido=true;
                 Toast toastValidarError = Toast.makeText(getApplicationContext(),"Usuario válido",Toast.LENGTH_SHORT);
                 toastValidarError.show();
@@ -185,25 +198,4 @@ public class Registro extends AppCompatActivity {
         return true;
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static String getHtml(String url) throws IOException {
-        // Construimos una conexion
-        URL nuevaUrl = new URL(url);
-        URLConnection conexion = nuevaUrl.openConnection();
-
-        StringBuilder html = null;
-        // Leemos, como un String, la primera linea del HTML
-        try (InputStream in = conexion.getInputStream()) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            html = new StringBuilder();
-            for (String line; (line = reader.readLine()) != null; ) {
-                html.append(line);}
-        }catch (IOException e) {}
-        // Comprobamos que se ha incluido algo en el html
-        if (html == null){
-            String mensajeError = "ERROR. NO HTML";
-            return mensajeError;
-            // Si contiene algo, lo devolvemos
-        }else{return html.toString();}
-    }
 }

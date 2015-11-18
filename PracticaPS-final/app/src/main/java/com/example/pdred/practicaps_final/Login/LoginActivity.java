@@ -31,6 +31,7 @@ public class LoginActivity extends Activity {
         Button botonLogin = (Button) findViewById(R.id.button);
         Button botonRegistro = (Button) findViewById(R.id.button2);
 
+        // Recoge el boton del Layout de registro y le proporciona funcionalidad
         botonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,21 +41,24 @@ public class LoginActivity extends Activity {
             }
         });
 
+        // Recoge el boton del Layout de login y le proporciona funcionalidad
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // recoge los datos introducidos por el usuario
                 String usuario = ((EditText) findViewById(R.id.editText)).getText().toString();
                 String password = ((EditText) findViewById(R.id.editText2)).getText().toString();
-                // Crea un background, pasandole los datos que vamos a necesitar (Todos los que queramos)
-                if (checklogindata(usuario,password)){
+                // Crea un background, pasandole los datos que introdujo el usuario
+                if (checklogindata(usuario,password)){ // Solo si estos datos son correctos
                 new asynclogin().execute(usuario, password);} else err_login();
             }
         });
     }
-    public void err_login(){
+    public void err_login(){ //Muestra un mensaje de error
         Toast toast1 = Toast.makeText(getApplicationContext(),"Error. Nombre de usuario o contraseña no valido",Toast.LENGTH_SHORT);
         toast1.show();
     }
+
     class asynclogin extends AsyncTask <String,String,String>{
         //Declaramos las variables que vamos a recoger
         String user, pass;
