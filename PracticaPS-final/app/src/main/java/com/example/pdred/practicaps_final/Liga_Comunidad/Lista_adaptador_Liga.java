@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 public abstract class Lista_adaptador_Liga extends BaseAdapter {
-
+    // Adaptador de lista (NO TOCAR)
     private ArrayList<?> entradas;
     private int R_layout_IdView;
     private Context contexto;

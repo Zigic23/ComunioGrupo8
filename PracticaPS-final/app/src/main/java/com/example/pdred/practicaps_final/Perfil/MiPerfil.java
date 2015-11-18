@@ -9,7 +9,7 @@ import com.example.pdred.practicaps_final.R;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
 
 public class MiPerfil extends AppCompatActivity {
-
+    // Esta actividad muestra los datos del usuario actual
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
