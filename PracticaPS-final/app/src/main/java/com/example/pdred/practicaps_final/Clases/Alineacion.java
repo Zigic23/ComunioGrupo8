@@ -33,7 +33,6 @@ public class Alineacion {
         Delantero1 = defecto;
         Delantero2 = defecto;
         Delantero3 = defecto;
-
     }
 
 
@@ -86,5 +85,23 @@ public class Alineacion {
             else if (Delantero3.getNombreJugador().equals(nom)){Delantero3 = defecto;added = true;}}break;
         }
         return added;
+    }
+
+    public String getIDs (){
+        String p= String.valueOf(Portero.getImagenId());
+        String d1= String.valueOf(Defensa1.getImagenId());
+        String d2= String.valueOf(Defensa2.getImagenId());
+        String d3= String.valueOf(Defensa3.getImagenId());
+        String d4= String.valueOf(Defensa4.getImagenId());
+        String m1= String.valueOf(Medio1.getImagenId());
+        String m2= String.valueOf(Medio1.getImagenId());
+        String m3= String.valueOf(Medio1.getImagenId());
+        String a1= String.valueOf(Delantero1.getImagenId());
+        String a2= String.valueOf(Delantero2.getImagenId());
+        String a3= String.valueOf(Delantero3.getImagenId());
+
+        String ids = p+","+d1+","+d2+","+d3+","+d4+","+m1+","+m2+","+m3+","+a1+","+a2+","+a3;
+
+        return ids;
     }
 }

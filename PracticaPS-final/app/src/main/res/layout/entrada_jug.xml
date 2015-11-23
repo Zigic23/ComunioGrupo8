@@ -61,6 +61,17 @@
             android:layout_marginEnd="28dp"
             android:background="@drawable/delete" />
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton4"
+            android:background="@drawable/sell"
+            android:layout_alignTop="@+id/imageButton"
+            android:layout_toLeftOf="@+id/imageButton"
+            android:layout_toStartOf="@+id/imageButton"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp" />
+
     </RelativeLayout>
 
 </LinearLayout>

@@ -31,12 +31,12 @@ public class UtilidadesURL {
 
     public static String setRegistroComunidad(String comunidad, String user, String pass, String equipo){
         String comunidad2 =comunidad.replace(' ','_');
-        return "http://comunio.garcy.es/?funcion=registroPorComunidad&comunidad="+comunidad2+"&usuario="+user+"&contraseña="+pass+"&equipo="+equipo;
+        return "http://comunio.garcy.es/?funcion=registroPorComunidad&comunidad="+comunidad2+"&usuario="+user+"&contrase%C3%B1a="+pass+"&equipo="+equipo;
     }
 
     public static String setRegistroNuevaComunidad(String comunidad,String user, String pass, String equipo){
         String comunidad2 =comunidad.replace(' ','_');
-        return "http://comunio.garcy.es/?funcion=registroC&comunidad="+comunidad2+"+&usuario="+user+"&contraseña="+pass+"&equipo="+equipo;
+        return "http://comunio.garcy.es/?funcion=registroC&comunidad="+comunidad2+"+&usuario="+user+"&contrase%C3%B1a="+pass+"&equipo="+equipo;
     }
 
     public static String setRegistroEquipo(String comunidad){
@@ -58,5 +58,21 @@ public class UtilidadesURL {
 
     public static String setComunidad(String comunidad){
         return "http://comunio.garcy.es/?funcion=jugadoresComunidad&comunidad="+comunidad;
+    }
+
+    // GENERADOR DE URL's PARA EL EQUIPO
+
+    public static String setAlineacion(String user, String alineacion){
+        return "http://comunio.garcy.es/?funcion=actualizarOnce&usuario="+user+"&equipo="+alineacion;
+    }
+
+    // GENERADOR DE URL's PARA FICHAJES/VENTAS
+
+    public static String setPresupuesto(String user, String presupuesto){
+        return "http://comunio.garcy.es/?funcion=presupuesto&usuario="+user+"&presupuesto="+presupuesto;
+    }
+
+    public static String setVender(String user, String id){
+        return "http://comunio.garcy.es/?funcion=vender&usuario="+user+"&jugador="+id;
     }
 }
