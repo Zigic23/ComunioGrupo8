@@ -3,29 +3,26 @@ package com.example.pdred.practicaps_final.Equipo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pdred.practicaps_final.Clases.Jugador;
 import com.example.pdred.practicaps_final.R;
 
+
 import java.util.ArrayList;
 
-import static com.example.pdred.practicaps_final.Clases.Jugador.getImagen;
-import static com.example.pdred.practicaps_final.UsuarioEstatico.getAlineacion;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
 
 public class MiEquipo extends Activity{
 
     static ArrayList<Jugador> listado;
     static int[] juegan;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager lManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,16 +57,20 @@ public class MiEquipo extends Activity{
     }
 
     public void setAll (ArrayList<Jugador> listac) {
-        ListView lista = (ListView) findViewById(R.id.listView1);
-        lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_jug, listac) {
+        RecyclerView lista = (RecyclerView)findViewById(R.id.listView1);
+        lManager = new LinearLayoutManager(this);
+        lista.setLayoutManager(lManager);
+        adapter = new RecyclerAdapter(listac, this);
+        lista.setAdapter(adapter);
+        /*lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_jug, listac) {
             @Override
             public void onEntrada(final Object entrada, View view) {
                 int idImagen = getImagen(((Jugador) entrada).getImagenId());
 
-                TextView texto_nombre = (TextView) view.findViewById(R.id.nombre);
+                TextView texto_nombre = (TextView) view.findViewById(R.id.txtName);
                 texto_nombre.setText(((Jugador) entrada).getNombreJugador());
 
-                TextView texto_posicion = (TextView) view.findViewById(R.id.posicion);
+                TextView texto_posicion = (TextView) view.findViewById(R.id.txtPos);
                 texto_posicion.setText(((Jugador) entrada).getPosicion());
 
                 ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView2);
@@ -96,6 +97,7 @@ public class MiEquipo extends Activity{
                     }
                 });
 
+
                 ImageButton botonDelete = (ImageButton) view.findViewById(R.id.imageButton2);
                 botonDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -107,6 +109,7 @@ public class MiEquipo extends Activity{
                         ((Jugador) entrada).setJuega(0);
                     }
                 });
+                */
 
                 // SWITCH
 
@@ -132,9 +135,9 @@ public class MiEquipo extends Activity{
                         }
 
                     }
-                });*/
+                });
 
             }
-        });
+        }); */
     }
 }

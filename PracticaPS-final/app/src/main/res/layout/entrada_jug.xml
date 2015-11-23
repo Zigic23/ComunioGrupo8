@@ -19,7 +19,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/nombre"
+            android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre"
@@ -34,8 +34,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Posicion"
-            android:id="@+id/posicion"
-            android:layout_below="@+id/nombre"
+            android:id="@+id/txtPos"
+            android:layout_below="@+id/txtName"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageButton"
             android:background="@drawable/add"
-            android:layout_alignBottom="@+id/posicion"
+            android:layout_alignBottom="@+id/txtPos"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="74dp"
