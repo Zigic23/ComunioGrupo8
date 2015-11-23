@@ -23,9 +23,10 @@ import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
 
 
 public class Inicio extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    // Esta es la actividad principal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Genera la interfaz, ademas de su barra superior y menu correspondientes
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -41,6 +42,7 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    // Indica que se hace al darle hacia atras
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -51,16 +53,18 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         }
     }
 
+    // Cuando abres el menu, carga tu nombre de usuario y tus puntos
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         TextView nombre = (TextView) findViewById(R.id.textView10);
-        nombre.setText(getCurrentUser().getNombreUsuario() + " "+ String.valueOf(getCurrentUser().getPuntos())+" puntos");
+        String datos = getCurrentUser().getNombreUsuario() + " "+ String.valueOf(getCurrentUser().getPuntos())+" puntos";
+        nombre.setText(datos);
         return true;
     }
 
-
+    // Este metodo enlaza los botones del menu con las respectivas actividades
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

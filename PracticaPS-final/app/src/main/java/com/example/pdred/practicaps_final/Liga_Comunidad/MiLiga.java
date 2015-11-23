@@ -17,12 +17,15 @@ import static com.example.pdred.practicaps_final.UsuarioEstatico.getUsuariosLiga
 
 
 public class MiLiga extends AppCompatActivity {
-
+    // Esta actividad muestra los usuarios de la liga a la que pertenece el jugador
+    // Deberia tener su propio BACKGROUND (igual que Mercado)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Recoge los usuarios de la liga
         ArrayList<Usuario> listado = getUsuariosLiga();
         setContentView(R.layout.activity_mi_liga);
+        //Los introduce a la lista
         setAll(listado);
     }
 
@@ -30,15 +33,13 @@ public class MiLiga extends AppCompatActivity {
         ListView lista = (ListView) findViewById(R.id.listView2);
         lista.setAdapter(new Lista_adaptador_Liga(this, R.layout.entrada_liga, listac) {
             @Override
+            // Para cada usuario, genera los siguientes datos en su entrada
             public void onEntrada(Object entrada, View view) {
                 TextView texto_nombre = (TextView) view.findViewById(R.id.textView_NombreUsuario);
                 texto_nombre.setText(((Usuario) entrada).getNombreUsuario());
 
                 TextView texto_puntos = (TextView) view.findViewById(R.id.textView_Puntos);
                 texto_puntos.setText("Puntos: "+String.valueOf(((Usuario) entrada).getPuntos()));
-
-                //TextView texto_equipo = (TextView) view.findViewById(R.id.textView_Equipo);
-                //texto_equipo.setText(((Usuario) entrada).getEquipo().getNombreEquipo());
 
                 ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen2);
                 imagen_entrada.setImageResource(R.drawable.sym_def_app_icon);
