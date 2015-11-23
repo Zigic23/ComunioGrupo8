@@ -40,6 +40,7 @@ public class UsuarioEstatico {
         String puntos = getLine(url, 1);
         String presupuesto = getLine(url, 2);
         String comunidad = getLine(url, 3);
+        // Genra una nueva alineacion (HAY QUE ACTUALIZARLO PARA QUE SE CARGUE EN FUNCION DEL CAMPO JUEGA DE CADA JUGADOR)
         // Obtiene los jugadores del equipo del usuario (SIGUE EL EQUIPO POR DEFECTO)
         Equipo equipo = setEquipoPruebas(); //PRUEBAS
         String url2 = setFuncionEquipo(user);
