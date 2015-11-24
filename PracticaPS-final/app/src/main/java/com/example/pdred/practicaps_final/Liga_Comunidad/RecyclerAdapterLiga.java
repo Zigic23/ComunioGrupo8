@@ -1,0 +1,71 @@
+package com.example.pdred.practicaps_final.Liga_Comunidad;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.pdred.practicaps_final.Clases.Usuario;
+import com.example.pdred.practicaps_final.R;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.getHtml;
+import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setPresupuesto;
+import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setVender;
+
+/**
+ * Created by Zigic on 16/11/2015.
+ */
+public class RecyclerAdapterLiga extends RecyclerView.Adapter<RecyclerAdapterLiga.PlayerHolder>  {
+
+
+    private List<Usuario> jugadores;
+
+    @Override
+    public int getItemCount() {
+        return jugadores.size();
+    }
+
+    public RecyclerAdapterLiga(ArrayList<Usuario> jug){
+        this.jugadores = jug;
+    }
+
+    @Override
+    public void onBindViewHolder(PlayerHolder contactViewHolder, int i) {
+        final Usuario ju = jugadores.get(i);
+        contactViewHolder.texto_nombre.setText(ju.getNombreUsuario());
+        contactViewHolder.texto_puntos.setText("Puntos: "+String.valueOf(ju.getPuntos()));
+        contactViewHolder.imagen_entrada.setImageResource(R.drawable.sym_def_app_icon);
+    }
+
+    @Override
+    public PlayerHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View itemView = LayoutInflater.from(viewGroup.getContext()).
+                inflate(R.layout.entrada_liga, viewGroup, false);
+
+        return new PlayerHolder(itemView);
+    }
+
+
+
+    public class PlayerHolder extends RecyclerView.ViewHolder {
+
+        protected TextView texto_nombre;
+        protected TextView texto_puntos;
+        protected ImageView imagen_entrada;
+        public PlayerHolder(View v) {
+            super(v);
+            texto_nombre =  (TextView) v.findViewById(R.id.textView_NombreUsuario);
+            texto_puntos = (TextView) v.findViewById(R.id.textView_Puntos);
+            imagen_entrada = (ImageView) v.findViewById(R.id.imageView_imagen2);
+        }
+    }
+}

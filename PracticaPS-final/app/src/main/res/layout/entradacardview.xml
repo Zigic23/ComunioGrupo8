@@ -59,6 +59,16 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="25dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton4"
+            android:background="@drawable/sell"
+            android:layout_alignTop="@+id/add"
+            android:layout_toLeftOf="@+id/add"
+            android:layout_toStartOf="@+id/add"
+            android:layout_marginRight="25dp" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
