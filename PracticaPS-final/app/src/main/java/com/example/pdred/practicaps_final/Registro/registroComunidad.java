@@ -27,7 +27,7 @@ import static com.example.pdred.practicaps_final.UsuarioEstatico.setComunidadNue
 import static com.example.pdred.practicaps_final.UsuarioEstatico.setCurrentComunidad;
 import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setExisteComunidad;
 
-public class RegistroComunidad extends AppCompatActivity {
+public class registroComunidad extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class RegistroComunidad extends AppCompatActivity {
     class asyncComunidad extends AsyncTask<String,String,String> {
         String comunidad;
         protected void OnPreExecute(){
-            ProgressDialog pDialog = new ProgressDialog(RegistroComunidad.this);
+            ProgressDialog pDialog = new ProgressDialog(registroComunidad.this);
             pDialog.setMessage("VALIDANDO COMUNIDAD...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -82,7 +82,7 @@ public class RegistroComunidad extends AppCompatActivity {
             // Si existe, pasa a la siguiente fase el registro
             if (result.equals("EXISTE")){
                 Intent nuevaActividad;
-                nuevaActividad = new Intent(RegistroComunidad.this, Registro.class);
+                nuevaActividad = new Intent(registroComunidad.this, Registro.class);
                 setCurrentComunidad(comunidad);
                 setComunidadNueva(false);
                 startActivity(nuevaActividad);
@@ -98,7 +98,7 @@ public class RegistroComunidad extends AppCompatActivity {
     class asyncNuevaComunidad extends AsyncTask<String,String,String> {
         String comunidad;
         protected void OnPreExecute(){
-            ProgressDialog pDialog = new ProgressDialog(RegistroComunidad.this);
+            ProgressDialog pDialog = new ProgressDialog(registroComunidad.this);
             pDialog.setMessage("VALIDANDO COMUNIDAD...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -121,7 +121,7 @@ public class RegistroComunidad extends AppCompatActivity {
             // Si no existe, pasa a la siguiente fase del registro
             if (result.equals("ERROR")){
                 Intent nuevaActividad;
-                nuevaActividad = new Intent(RegistroComunidad.this, Registro.class);
+                nuevaActividad = new Intent(registroComunidad.this, Registro.class);
                 // Guarda esta nueva comunidad para poder crearla en la siguiente fase del registro junto con el usuario
                 setCurrentComunidad(comunidad);
                 setComunidadNueva(true);

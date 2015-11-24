@@ -8,10 +8,10 @@
     android:background="#ffffff">
     tools:context=".EquipoActivity">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView1"
+        android:id="@+id/recycler1"
         android:layout_marginLeft="15dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
@@ -34,10 +34,10 @@
         android:layout_gravity="center"
         android:textSize="56sp"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/listView1"
-        android:layout_alignStart="@+id/listView1"
-        android:layout_alignRight="@+id/listView1"
-        android:layout_alignEnd="@+id/listView1" />
+        android:layout_alignRight="@+id/recycler1"
+        android:layout_alignEnd="@+id/recycler1"
+        android:layout_alignLeft="@+id/recycler1"
+        android:layout_alignStart="@+id/recycler1" />
 
     <Button
         android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         android:layout_below="@+id/editText4"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/listView1"
-        android:layout_alignStart="@+id/listView1" />
+        android:layout_alignLeft="@+id/editText4"
+        android:layout_alignStart="@+id/recycler1" />
 
 </RelativeLayout>
