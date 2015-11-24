@@ -94,7 +94,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
             public void onClick(View v) {
                 final Jugador jugador = (ju);
                 int precioVenta = (int) (jugador.getPrecio() *0.7);
-                AlertDialog.Builder dialogo1 = new AlertDialog.Builder((mContext).getApplicationContext());
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(mContext);
                 dialogo1.setTitle("Importante");
                 dialogo1.setMessage("¿ Desea vender a " + jugador.getNombreJugador() + " por "+precioVenta+" ?");
                 dialogo1.setCancelable(false);
