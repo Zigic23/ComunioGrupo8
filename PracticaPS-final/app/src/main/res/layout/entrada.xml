@@ -47,10 +47,8 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_gravity="center_horizontal"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView_superior"
-            android:layout_toEndOf="@+id/textView_superior"
-            android:layout_marginLeft="23dp"
-            android:layout_marginStart="23dp" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <ImageButton
             android:layout_width="wrap_content"

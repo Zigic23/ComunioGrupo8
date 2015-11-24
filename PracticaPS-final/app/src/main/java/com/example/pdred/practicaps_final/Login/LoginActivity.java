@@ -11,7 +11,7 @@ package com.example.pdred.practicaps_final.Login;
 
     import com.example.pdred.practicaps_final.Main_Menu.Inicio;
     import com.example.pdred.practicaps_final.R;
-    import com.example.pdred.practicaps_final.Registro.RegistroComunidad;
+    import com.example.pdred.practicaps_final.Registro.registroComunidad;
 
     import java.io.IOException;
 
@@ -36,7 +36,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent nuevaActividad;
-                nuevaActividad = new Intent(LoginActivity.this, RegistroComunidad.class);
+                nuevaActividad = new Intent(LoginActivity.this, registroComunidad.class);
                 startActivity(nuevaActividad);
             }
         });
