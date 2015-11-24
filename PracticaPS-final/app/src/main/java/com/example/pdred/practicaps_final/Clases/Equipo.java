@@ -7,6 +7,7 @@ package com.example.pdred.practicaps_final.Clases;
 
 import com.example.pdred.practicaps_final.R;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -83,13 +84,19 @@ public class Equipo {
     public static Jugador parsearJugador(String jugador){
         String[] jugadorItems = jugador.split(",");
         int id = Integer.parseInt(jugadorItems[0].replace(" ", ""));
-        String nombreJugador = jugadorItems[1].replace(" ","");
+        String nombreJ = jugadorItems[1].replace(" ", "");
+        String nombreJugador = null;
+        try {
+            nombreJugador= new String(nombreJ.getBytes("ISO-8859-1"), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String posicion = jugadorItems[2].replace(" ", "");
-        int juega = Integer.parseInt(jugadorItems[3].replace(" ",""));
-        int puntos = Integer.parseInt(jugadorItems[4].replace(" ",""));
+        int precio = Integer.parseInt(jugadorItems[3].replace(" ", ""));
+        int juega = Integer.parseInt(jugadorItems[4].replace(" ", ""));
         String owner = jugadorItems[5].replace(" ","");
 
-        Jugador player = new Jugador(id,nombreJugador,posicion,juega,puntos,owner);
+        Jugador player = new Jugador(id, nombreJugador, posicion, precio * 100, juega, owner);
         return player;
     }
 

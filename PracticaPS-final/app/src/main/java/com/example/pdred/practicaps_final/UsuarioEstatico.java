@@ -41,7 +41,6 @@ public class UsuarioEstatico {
         String presupuesto = getLine(url, 2);
         String comunidad = getLine(url, 3);
         // Genra una nueva alineacion (HAY QUE ACTUALIZARLO PARA QUE SE CARGUE EN FUNCION DEL CAMPO JUEGA DE CADA JUGADOR)
-        alineacion = new Alineacion();
         // Obtiene los jugadores del equipo del usuario (SIGUE EL EQUIPO POR DEFECTO)
         Equipo equipo = setEquipoPruebas(); //PRUEBAS
         String url2 = setFuncionEquipo(user);
@@ -55,6 +54,12 @@ public class UsuarioEstatico {
         // Crea un nuevo usuario en la aplicación a partir de esta información
         Usuario newUser = new Usuario(user,comunidad,presupuestoP,puntosP,equipo);
         setCurrentUser(newUser);
+        // Genra una nueva alineacion (HAY QUE ACTUALIZARLO PARA QUE SE CARGUE EN FUNCION DEL CAMPO JUEGA DE CADA JUGADOR)
+        alineacion = new Alineacion();
+        // Cargamos nuestra alineacion
+        for (Jugador jug : getCurrentUser().getEquipo().getListaJugadores()) {
+            if (jug.getJuega() == 1) {alineacion.addJugador(jug);}
+        }
     }
 
 

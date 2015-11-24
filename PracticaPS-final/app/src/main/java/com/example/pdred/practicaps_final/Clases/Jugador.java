@@ -44,10 +44,6 @@ public class Jugador {
     public int getPrecio () {
         return precio;
     }
-    
-    public void setPrecio (int p){
-        precio = p;
-    }
 
     public static int getImagen(int n) {
         int id;

@@ -45,7 +45,7 @@ import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setVal
 
 public class Registro extends AppCompatActivity {
 
-    private boolean nombreValido=false;
+    private boolean nombreValido = false;
 
 
     @Override
