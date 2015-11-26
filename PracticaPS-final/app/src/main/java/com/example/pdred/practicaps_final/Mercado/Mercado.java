@@ -6,18 +6,18 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pdred.practicaps_final.Clases.Jugador;
+import com.example.pdred.practicaps_final.Equipo.RecyclerAdapter;
+import com.example.pdred.practicaps_final.Liga_Comunidad.RecyclerAdapterLiga;
 import com.example.pdred.practicaps_final.Main_Menu.Inicio;
 import com.example.pdred.practicaps_final.R;
 
@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import static com.example.pdred.practicaps_final.Clases.Equipo.parsearJugadores;
-import static com.example.pdred.practicaps_final.Clases.Jugador.getImagen;
 import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.getHtml;
 import static com.example.pdred.practicaps_final.Utilidades.MetodosIO.getAllLines;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
@@ -38,7 +37,8 @@ public class Mercado extends AppCompatActivity {
     // Actividad Mercado
 
     // ListView donde se añadiran los jugadores
-    ListView listView44;
+    RecyclerView listView44;
+    private RecyclerView.Adapter adapter;
     // Jugadores que apareceran en el mercado
     ArrayList<Jugador> enVenta;
     // String con los datos de los jugadores (Para parsear)
@@ -65,7 +65,7 @@ public class Mercado extends AppCompatActivity {
         } else {
             // Si encuentra jugadores, os añade al ListView
             setContentView(R.layout.activity_mercado);
-            listView44  = (ListView) findViewById(R.id.listViewMercado);
+            listView44  = (RecyclerView) findViewById(R.id.listViewMercado);
             setAll(enVenta);
         }
 
@@ -123,8 +123,13 @@ public class Mercado extends AppCompatActivity {
     }
 
     public void setAll (ArrayList<Jugador> listac) {
+        final LinearLayoutManager lManager = new LinearLayoutManager(this);
+        lManager.setOrientation(LinearLayoutManager.VERTICAL);
+        listView44.setLayoutManager(lManager);
+        adapter = new RecyclerAdapterMercado(listac, this);
+        listView44.setAdapter(adapter);
         // La ListView recibe los jugadores
-        listView44.setAdapter(new Lista_adaptador_Mercado(this, R.layout.entrada, listac) {
+        /*listView44.setAdapter(new Lista_adaptador_Mercado(this, R.layout.entrada, listac) {
             @Override
             // Para cada jugador crear una nueva entrada
             public void onEntrada(final Object entrada, View view) {
@@ -171,7 +176,7 @@ public class Mercado extends AppCompatActivity {
                     });
                 }
             }
-        });
+        });*/
     }
 
     class asyncPujar extends AsyncTask<String,String,String> {
