@@ -260,7 +260,7 @@ public class Mercado extends AppCompatActivity {
                             Toast toast1 = Toast.makeText((builder.getContext()).getApplicationContext(),"No tiene suficiente presupuesto", Toast.LENGTH_SHORT);
                             toast1.show();
                         }else{
-                            if (pujaActual < precioActual+99){
+                            if (pujaActual < precioActual){
                                 Toast toast1 = Toast.makeText((builder.getContext()).getApplicationContext(),"Puja insuficiente", Toast.LENGTH_SHORT);
                                 toast1.show();
                             }else{

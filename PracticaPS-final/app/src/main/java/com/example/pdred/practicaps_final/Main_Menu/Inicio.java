@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -52,6 +53,17 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent nuevaActividad;
+            nuevaActividad = new Intent(Inicio.this, Inicio.class);
+            startActivity(nuevaActividad);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     // Cuando abres el menu, carga tu nombre de usuario y tus puntos
