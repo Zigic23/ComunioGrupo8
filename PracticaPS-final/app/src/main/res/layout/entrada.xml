@@ -54,13 +54,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton3"
-            android:background="@drawable/buy"
+            android:background="@drawable/pujar"
             android:layout_marginRight="35dp"
             android:layout_marginEnd="35dp"
             android:clickable="true"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButtonSubasta"
+            android:background="@drawable/subasta"
+            android:layout_alignTop="@+id/imageButton3"
+            android:layout_toLeftOf="@+id/imageButton3"
+            android:layout_toStartOf="@+id/imageButton3"
+            android:layout_marginRight="18dp"
+            android:layout_marginEnd="18dp" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -44,27 +44,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/add"
-            android:background="@drawable/add"
+            android:background="@drawable/up"
             android:layout_alignBottom="@+id/txtPos"
-            android:layout_toLeftOf="@+id/delete"
-            android:layout_toStartOf="@+id/delete"
-            android:layout_marginRight="25dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/delete"
-            android:background="@drawable/delete"
-            android:layout_alignTop="@+id/add"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="25dp" />
+            android:layout_marginRight="27dp"
+            android:layout_marginEnd="27dp" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton4"
-            android:background="@drawable/sell"
+            android:background="@drawable/getmoney"
             android:layout_alignTop="@+id/add"
             android:layout_toLeftOf="@+id/add"
             android:layout_toStartOf="@+id/add"

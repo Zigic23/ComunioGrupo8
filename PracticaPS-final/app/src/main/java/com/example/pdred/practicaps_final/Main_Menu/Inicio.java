@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.pdred.practicaps_final.Equipo.MiEquipo;
+import com.example.pdred.practicaps_final.Equipo.TabEquipo;
 import com.example.pdred.practicaps_final.Liga_Comunidad.MiLiga;
 import com.example.pdred.practicaps_final.Login.LoginActivity;
 import com.example.pdred.practicaps_final.Perfil.MiPerfil;
@@ -77,7 +78,7 @@ public class Inicio extends AppCompatActivity implements NavigationView.OnNaviga
             startActivity(nuevaActividad);
         } else if (id == R.id.mi_equipo) {
             Intent nuevaActividad;
-            nuevaActividad = new Intent(Inicio.this, MiEquipo.class);
+            nuevaActividad = new Intent(Inicio.this, TabEquipo.class);
             startActivity(nuevaActividad);
 
         } else if (id == R.id.mi_liga) {

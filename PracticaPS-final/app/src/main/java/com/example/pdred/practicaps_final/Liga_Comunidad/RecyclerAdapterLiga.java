@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setVen
 /**
  * Created by Zigic on 16/11/2015.
  */
-public class RecyclerAdapterLiga extends RecyclerView.Adapter<RecyclerAdapterLiga.PlayerHolder>  {
+public class RecyclerAdapterLiga extends RecyclerView.Adapter<RecyclerAdapterLiga.PlayerHolder> {
 
 
     private List<Usuario> jugadores;
@@ -34,7 +35,7 @@ public class RecyclerAdapterLiga extends RecyclerView.Adapter<RecyclerAdapterLig
         return jugadores.size();
     }
 
-    public RecyclerAdapterLiga(ArrayList<Usuario> jug){
+    public RecyclerAdapterLiga(ArrayList<Usuario> jug) {
         this.jugadores = jug;
     }
 
@@ -42,8 +43,19 @@ public class RecyclerAdapterLiga extends RecyclerView.Adapter<RecyclerAdapterLig
     public void onBindViewHolder(PlayerHolder contactViewHolder, int i) {
         final Usuario ju = jugadores.get(i);
         contactViewHolder.texto_nombre.setText(ju.getNombreUsuario());
-        contactViewHolder.texto_puntos.setText("Puntos: "+String.valueOf(ju.getPuntos()));
+        contactViewHolder.texto_puntos.setText("Puntos: " + String.valueOf(ju.getPuntos()));
         contactViewHolder.imagen_entrada.setImageResource(R.drawable.sym_def_app_icon);
+        if (i > 2) {
+            contactViewHolder.imageRanked.setVisibility(View.INVISIBLE);
+        } else {
+            if (i == 1) {
+                contactViewHolder.imageRanked.setImageResource(R.drawable.plata);
+            }
+            if (i == 2) {
+                contactViewHolder.imageRanked.setImageResource(R.drawable.bronze);
+            }
+        }
+
     }
 
     @Override
@@ -55,17 +67,19 @@ public class RecyclerAdapterLiga extends RecyclerView.Adapter<RecyclerAdapterLig
     }
 
 
-
     public class PlayerHolder extends RecyclerView.ViewHolder {
 
         protected TextView texto_nombre;
         protected TextView texto_puntos;
+        protected ImageView imageRanked;
         protected ImageView imagen_entrada;
+
         public PlayerHolder(View v) {
             super(v);
-            texto_nombre =  (TextView) v.findViewById(R.id.textView_NombreUsuario);
+            texto_nombre = (TextView) v.findViewById(R.id.textView_NombreUsuario);
             texto_puntos = (TextView) v.findViewById(R.id.textView_Puntos);
             imagen_entrada = (ImageView) v.findViewById(R.id.imageView_imagen2);
+            imageRanked = (ImageButton) v.findViewById(R.id.ranked);
         }
     }
 }

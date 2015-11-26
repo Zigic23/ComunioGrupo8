@@ -17,7 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Equipo.MiEquipo" />
+        <activity android:name=".Equipo.TabEquipo"
+            android:label="Alineación"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <fragment android:name=".Equipo.MiEquipo" />
         <activity
             android:name=".Main_Menu.Inicio"
             android:label="Inicio"
@@ -25,16 +29,19 @@
         </activity>
         <activity android:name=".Registro.Registro" >
         </activity>
-        <activity android:name=".Perfil.MiPerfil" >
+        <activity android:name=".Perfil.MiPerfil"
+            android:label="Mi Perfil">
         </activity>
-        <activity android:name=".Liga_Comunidad.MiLiga" >
+        <activity android:name=".Liga_Comunidad.MiLiga"
+            android:label="Mi Liga">
         </activity>
-        <activity android:name=".Mercado.Mercado" >
+        <activity android:name=".Mercado.Mercado"
+            android:label="Mercado">
         </activity>
-        <activity android:name=".Registro.RegistroComunidad" >
+        <activity android:name=".Registro.registroComunidad" >
         </activity>
-        <activity android:name=".Equipo.AlineacionEquipo" >
-        </activity>
+        <fragment android:name=".Equipo.AlineacionEquipo" >
+        </fragment>
     </application>
 
 </manifest>

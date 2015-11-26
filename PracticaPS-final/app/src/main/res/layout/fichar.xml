@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="261dp"
+        android:layout_gravity="center_horizontal">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTextPuja"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/textViewDialogo"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="     Introduzca su puja"
+            android:id="@+id/textViewDialogo"
+            android:editable="false"
+            android:textColor="#00014b"
+            android:layout_weight="0.12"
+            android:textSize="30sp"
+            android:textIsSelectable="false"
+            android:padding="@dimen/abc_action_bar_content_inset_material"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:id="@+id/buttonCancel"
+            android:layout_marginTop="32dp"
+            android:layout_below="@+id/editTextPuja"
+            android:layout_alignRight="@+id/editTextPuja"
+            android:layout_alignEnd="@+id/editTextPuja" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pujar"
+            android:id="@+id/buttonPujar"
+            android:layout_weight="0.12"
+            android:layout_alignTop="@+id/buttonCancel"
+            android:layout_alignLeft="@+id/editTextPuja"
+            android:layout_alignStart="@+id/editTextPuja"
+            android:layout_toLeftOf="@+id/buttonCancel"
+            android:layout_toStartOf="@+id/buttonCancel" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView5"
+            android:background="@drawable/pujar"
+            android:layout_below="@+id/textViewDialogo"
+            android:layout_toRightOf="@+id/editTextPuja"
+            android:layout_toEndOf="@+id/editTextPuja" />
+    </RelativeLayout>
+</LinearLayout>

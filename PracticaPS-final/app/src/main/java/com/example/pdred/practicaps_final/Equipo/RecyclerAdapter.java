@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.pdred.practicaps_final.Clases.Jugador.getImagen;
+import static com.example.pdred.practicaps_final.Equipo.AlineacionEquipo.refrescarView;
 import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.getHtml;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getAlineacion;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
@@ -47,11 +49,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
     }
 
     @Override
-    public void onBindViewHolder(PlayerHolder contactViewHolder, int i) {
+    public void onBindViewHolder(final PlayerHolder contactViewHolder, int i) {
         final Jugador ju = jugadores.get(i);
         contactViewHolder.vName.setText(ju.getNombreJugador());
         contactViewHolder.vPos.setText(ju.getPosicion());
-        contactViewHolder.vImagen.setImageResource(ju.getImagenId());
+        contactViewHolder.vImagen.setImageResource(getImagen(ju.getImagenId()));
+        if (ju.getJuega() == 1) {
+            contactViewHolder.vBotonAdd.setImageResource(R.drawable.down);
+        }
         contactViewHolder.vBotonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,21 +64,31 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
                     boolean introducido = getAlineacion().addJugador((ju));
                     (ju).setJuega(1);
                     if (introducido) {
+                        contactViewHolder.vBotonAdd.setImageResource(R.drawable.down);
                         Toast toast1 = Toast.makeText((mContext).getApplicationContext(), (ju).getNombreJugador() + " Convocado", Toast.LENGTH_SHORT);
                         toast1.show();
                     } else {
                         Toast toast2 = Toast.makeText((mContext).getApplicationContext(), "Retire un jugador para insertar", Toast.LENGTH_SHORT);
                         toast2.show();
                     }
+                    refrescarView();
                 } else {
-                    Toast toast3 = Toast.makeText((mContext).getApplicationContext(), "El jugador ya estaba convocado", Toast.LENGTH_SHORT);
-                    toast3.show();
+                    boolean eliminado = getAlineacion().removeJugador((ju));
+                    if (eliminado) {
+                        contactViewHolder.vBotonAdd.setImageResource(R.drawable.up);
+                        Toast toast1 = Toast.makeText((mContext).getApplicationContext(), (ju).getNombreJugador() + " Desconvocado", Toast.LENGTH_SHORT);
+                        toast1.show();
+                    }
+                    (ju).setJuega(0);
+                    refrescarView();
+                    //Toast toast3 = Toast.makeText((mContext).getApplicationContext(), "El jugador ya estaba convocado", Toast.LENGTH_SHORT);
+                    //toast3.show();
                 }
             }
         });
 
 
-        contactViewHolder.vBotonDel.setOnClickListener(new View.OnClickListener() {
+        /**contactViewHolder.vBotonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean eliminado = getAlineacion().removeJugador((ju));
@@ -86,8 +101,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
                     toast1.show();
                 }
                 (ju).setJuega(0);
+                refrescarView();
             }
-        });
+        });*/
 
         contactViewHolder.botonVender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,8 +125,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
                         // Hacemos la venta en la aplicacion (PARA EL USUARIO DE LA APP)
                         getCurrentUser().getEquipo().getListaJugadores().remove(jugador);
                         getCurrentUser().setDinero(nuevoPresupuesto);
+                        getAlineacion().removeJugador((ju));
                         Toast toast1 = Toast.makeText((mContext).getApplicationContext(), jugador.getNombreJugador() +" vendido", Toast.LENGTH_SHORT);
                         toast1.show();
+                        refrescarView();
                     }
                 });
                 dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -145,8 +163,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
             vPos = (TextView) v.findViewById(R.id.txtPos);
             vImagen = (ImageView) v.findViewById(R.id.imagenJugador1);
             vBotonAdd = (ImageButton) v.findViewById(R.id.add);
-            vBotonDel = (ImageButton) v.findViewById(R.id.delete);
             botonVender = (ImageButton) v.findViewById(R.id.imageButton4);
+
         }
     }
 
@@ -183,6 +201,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
         }
         //POST-EJECUCIÓN: Recoge lo que devuelve "doInBackground" y actua en funcion del resultado
         protected void onPostExecute (String result){
+            refrescarView();
         }
     }
 }

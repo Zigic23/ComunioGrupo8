@@ -75,4 +75,8 @@ public class UtilidadesURL {
     public static String setVender(String user, String id){
         return "http://comunio.garcy.es/?funcion=vender&usuario="+user+"&jugador="+id;
     }
+
+    public static String setPujar(String user, String idjugador, String nuevoPrecio){
+        return "http://comunio.garcy.es/?funcion=pujar&usuario="+user+"&jugador="+idjugador+"&precio="+nuevoPrecio;
+    }
 }

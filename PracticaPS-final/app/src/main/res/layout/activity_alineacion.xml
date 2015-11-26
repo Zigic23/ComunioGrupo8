@@ -13,12 +13,15 @@
         android:layout_height="wrap_content"
         android:text="Portero"
         android:id="@+id/textViewPortero"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/rounded_edittext7"
+        android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
-        android:background="@drawable/rounded_edittext7"
         android:padding="8dip"
-        android:textColor="#ffffff" />
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,38 +29,50 @@
         android:text="Defensa1"
         android:id="@+id/textViewDefensa1"
         android:background="@drawable/rounded_edittext5"
-        android:padding="8dip"
         android:textColor="#ffffff"
-        android:layout_below="@+id/textViewMedio1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="26dp" />
+        android:layout_above="@+id/textViewDefensa2"
+        android:layout_alignRight="@+id/textViewMedio2"
+        android:layout_alignEnd="@+id/textViewMedio2"
+        android:layout_marginBottom="32dp"
+        android:padding="8dip"
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Defensa2"
         android:id="@+id/textViewDefensa2"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="23dp"
         android:background="@drawable/rounded_edittext5"
-        android:padding="8dip"
         android:textColor="#ffffff"
+        android:padding="8dip"
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center"
         android:layout_above="@+id/textViewPortero"
-        android:layout_toLeftOf="@+id/textViewPortero"
-        android:layout_toStartOf="@+id/textViewPortero" />
+        android:layout_toLeftOf="@+id/textViewDefensa3"
+        android:layout_toStartOf="@+id/textViewDefensa3"
+        android:layout_marginRight="19dp"
+        android:layout_marginEnd="19dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Defensa3"
         android:id="@+id/textViewDefensa3"
-        android:layout_alignTop="@+id/textViewDefensa2"
-        android:layout_toRightOf="@+id/textViewPortero"
-        android:layout_toEndOf="@+id/textViewPortero"
         android:background="@drawable/rounded_edittext5"
-        android:padding="8dip"
         android:textColor="#ffffff"
-        />
+        android:padding="8dip"
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center"
+        android:layout_below="@+id/textViewDefensa1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,8 +80,11 @@
         android:text="Defensa4"
         android:id="@+id/textViewDefensa4"
         android:background="@drawable/rounded_edittext5"
-        android:padding="8dip"
         android:textColor="#ffffff"
+        android:padding="8dip"
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center"
         android:layout_alignTop="@+id/textViewDefensa1"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -76,11 +94,15 @@
         android:layout_height="wrap_content"
         android:text="Medio1"
         android:id="@+id/textViewMedio1"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_edittext3"
         android:padding="8dip"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff"
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/textViewPortero"
+        android:layout_alignStart="@+id/textViewPortero" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,21 +113,29 @@
         android:background="@drawable/rounded_edittext3"
         android:padding="8dip"
         android:textColor="#ffffff"
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center"
         android:layout_above="@+id/textViewMedio1"
-        android:layout_alignRight="@+id/textViewDefensa1"
-        android:layout_alignEnd="@+id/textViewDefensa1" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="22dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Medio3"
         android:id="@+id/textViewMedio3"
-        android:layout_above="@+id/textViewMedio1"
-        android:layout_alignLeft="@+id/textViewDefensa4"
-        android:layout_alignStart="@+id/textViewDefensa4"
         android:background="@drawable/rounded_edittext3"
         android:padding="8dip"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff"
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center"
+        android:layout_alignBaseline="@+id/textViewMedio2"
+        android:layout_alignBottom="@+id/textViewMedio2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 
@@ -117,10 +147,13 @@
         android:background="@drawable/rounded_edittext6"
         android:padding="8dip"
         android:textColor="#ffffff"
+        android:layout_marginTop="27dp"
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center"
         android:layout_below="@+id/textViewDelantero3"
-        android:layout_toLeftOf="@+id/textViewDelantero3"
-        android:layout_toStartOf="@+id/textViewDelantero3"
-        android:layout_marginTop="43dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -130,9 +163,12 @@
         android:background="@drawable/rounded_edittext6"
         android:padding="8dip"
         android:textColor="#ffffff"
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center"
         android:layout_alignTop="@+id/textViewDelantero1"
-        android:layout_toRightOf="@+id/textViewDelantero3"
-        android:layout_toEndOf="@+id/textViewDelantero3" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -142,7 +178,11 @@
         android:background="@drawable/rounded_edittext6"
         android:padding="8dip"
         android:textColor="#ffffff"
+        android:layout_marginTop="26dp"
+        android:height="35dp"
+        android:width="140dp"
+        android:textAlignment="center"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp" />
+        android:layout_alignLeft="@+id/textViewMedio1"
+        android:layout_alignStart="@+id/textViewMedio1" />
 </RelativeLayout>

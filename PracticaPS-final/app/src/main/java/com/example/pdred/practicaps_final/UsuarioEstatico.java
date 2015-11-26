@@ -114,30 +114,8 @@ public class UsuarioEstatico {
 
         // Genera los jugadores de pruebas
         public static ArrayList<Jugador> setJugadoresPruebas(){
-            Jugador jugador1 = new Jugador(R.drawable.neymar,"Neymar", "Delantero", 6000000,1,"POR DEFECTO");
-            Jugador jugador2 = new Jugador(R.drawable.nolito,"Nolito", "Delantero", 2000000,1,"POR DEFECTO");
-            Jugador jugador3 = new Jugador(R.drawable.cristiano,"Cristiano Ronaldo", "Delantero", 8000000,1,"POR DEFECTO");
-            Jugador jugador4 = new Jugador(R.drawable.reyes,"Reyes", "Medio", 2000000,1,"POR DEFECTO");
-            Jugador jugador5 = new Jugador(R.drawable.koke,"Koke", "Medio", 4000000,1,"POR DEFECTO");
-            Jugador jugador6 = new Jugador(R.drawable.tonikross,"Toni Kroos", "Medio", 5000000,1,"POR DEFECTO");
-            Jugador jugador7 = new Jugador(R.drawable.iconcono,"Arbeloa", "Defensa", 999999999,1,"POR DEFECTO");
-            Jugador jugador8 = new Jugador(R.drawable.pique,"Pique", "Defensa", 3000000,1,"POR DEFECTO");
-            Jugador jugador9 = new Jugador(R.drawable.demarcos,"De Marcos", "Defensa", 2000000,1,"POR DEFECTO");
-            Jugador jugador10 = new Jugador(R.drawable.rami,"Rami", "Defensa", 1000000,1,"POR DEFECTO");
-            Jugador jugador11 = new Jugador(R.drawable.keylornavas,"Keylor Navas", "Portero", 2000000,1,"POR DEFECTO");
 
             ArrayList<Jugador> nuevaPlantilla = new ArrayList<>();
-            nuevaPlantilla.add(jugador1);
-            nuevaPlantilla.add(jugador2);
-            nuevaPlantilla.add(jugador3);
-            nuevaPlantilla.add(jugador4);
-            nuevaPlantilla.add(jugador5);
-            nuevaPlantilla.add(jugador6);
-            nuevaPlantilla.add(jugador7);
-            nuevaPlantilla.add(jugador8);
-            nuevaPlantilla.add(jugador9);
-            nuevaPlantilla.add(jugador10);
-            nuevaPlantilla.add(jugador11);
 
             return nuevaPlantilla;
         }

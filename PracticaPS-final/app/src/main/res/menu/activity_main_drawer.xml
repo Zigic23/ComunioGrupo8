@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/mi_perfil" android:icon="@android:drawable/ic_menu_my_calendar"
+        <item android:id="@+id/mi_perfil" android:icon="@drawable/user"
             android:title="Mi Perfil"/>
-        <item android:id="@+id/mi_equipo" android:icon="@android:drawable/ic_menu_directions"
-            android:title="Mi Equipo" />
-        <item android:id="@+id/mi_liga" android:icon="@android:drawable/ic_menu_set_as"
+        <item android:id="@+id/mi_equipo" android:icon="@drawable/campo3"
+            android:title="Alineación" />
+        <item android:id="@+id/mi_liga" android:icon="@drawable/com"
             android:title="Mi Liga" />
-        <item android:id="@+id/mi_mercado" android:icon="@android:drawable/ic_menu_search"
+        <item android:id="@+id/mi_mercado" android:icon="@drawable/balanza"
             android:title="Mercado" />
-        <item android:id="@+id/cerrar_sesion"
+        <item android:id="@+id/cerrar_sesion" android:icon="@drawable/cerrarsesion"
             android:title="Cerrar Sesión" />
     </group>
 
