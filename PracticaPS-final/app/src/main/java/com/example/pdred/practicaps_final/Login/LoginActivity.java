@@ -3,6 +3,7 @@ package com.example.pdred.practicaps_final.Login;
     import android.os.AsyncTask;
     import android.os.Bundle;
     import android.content.Intent;
+    import android.view.KeyEvent;
     import android.view.View;
     import android.widget.Button;
     import android.widget.EditText;
@@ -57,6 +58,17 @@ public class LoginActivity extends Activity {
     public void err_login(){ //Muestra un mensaje de error
         Toast toast1 = Toast.makeText(getApplicationContext(),"Error. Nombre de usuario o contraseña no valido",Toast.LENGTH_SHORT);
         toast1.show();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent nuevaActividad;
+            nuevaActividad = new Intent(LoginActivity.this, LoginActivity.class);
+            startActivity(nuevaActividad);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     class asynclogin extends AsyncTask <String,String,String>{
