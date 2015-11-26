@@ -74,14 +74,18 @@ public class RecyclerAdapterMercado extends RecyclerView.Adapter<RecyclerAdapter
         if (ju.getOwner().equals(getCurrentUser().getNombreUsuario())) {
             contactViewHolder.botonPujar.setVisibility(View.INVISIBLE);
         } else {
-            contactViewHolder.botonPujar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Jugador jugador = ju;
-                    AlertDialog d = ((Mercado)mContext).createFicharDialogo(jugador);
-                    d.show();
-                }
-            });
+            if (ju.getPrecio() > getCurrentUser().getDinero()){
+                contactViewHolder.botonPujar.setVisibility(View.INVISIBLE);
+            }else{
+                contactViewHolder.botonPujar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Jugador jugador = ju;
+                        AlertDialog d = ((Mercado) mContext).createFicharDialogo(jugador);
+                        d.show();
+                    }
+                });
+            }
         }
     }
 
