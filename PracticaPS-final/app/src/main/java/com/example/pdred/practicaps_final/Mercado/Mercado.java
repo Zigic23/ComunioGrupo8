@@ -128,55 +128,6 @@ public class Mercado extends AppCompatActivity {
         listView44.setLayoutManager(lManager);
         adapter = new RecyclerAdapterMercado(listac, this);
         listView44.setAdapter(adapter);
-        // La ListView recibe los jugadores
-        /*listView44.setAdapter(new Lista_adaptador_Mercado(this, R.layout.entrada, listac) {
-            @Override
-            // Para cada jugador crear una nueva entrada
-            public void onEntrada(final Object entrada, View view) {
-                // Consigue una ID local de la imagen a partir de la ID del Jugador
-                int idImagen = getImagen(((Jugador) entrada).getImagenId());
-                // Muestra el nombre del jugador
-                TextView texto_nombre = (TextView) view.findViewById(R.id.textView_superior);
-                texto_nombre.setText(((Jugador) entrada).getNombreJugador());
-                // Muestra la posicion del jugador
-                TextView texto_posicion = (TextView) view.findViewById(R.id.textView2);
-                texto_posicion.setText("Posicion: " + ((Jugador) entrada).getPosicion());
-                // Muestra el precio del jugador
-                TextView texto_precio = (TextView) view.findViewById(R.id.textView_inferior);
-                texto_precio.setText("Precio: " + String.valueOf(((Jugador) entrada).getPrecio()));
-                // Muestra la imagen del jugador
-                ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
-                imagen_entrada.setImageResource(idImagen);
-
-                ImageButton icono = (ImageButton) view.findViewById(R.id.imageButtonSubasta);
-                if (((Jugador) entrada).getOwner().equals("System")) {
-                    icono.setVisibility(View.INVISIBLE);
-                } else {
-                    icono.setImageResource(R.drawable.subasta);
-                    icono.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast toast1 = Toast.makeText(getApplicationContext(), "El jugador esta subastado", Toast.LENGTH_SHORT);
-                            toast1.show();
-                        }
-                    });
-                }
-
-                ImageButton botonPujar = (ImageButton) view.findViewById(R.id.imageButton3);
-                if (((Jugador) entrada).getOwner().equals(getCurrentUser().getNombreUsuario())) {
-                    botonPujar.setVisibility(View.INVISIBLE);
-                } else {
-                    botonPujar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Jugador jugador = ((Jugador) entrada);
-                            AlertDialog d = createFicharDialogo(jugador);
-                            d.show();
-                        }
-                    });
-                }
-            }
-        });*/
     }
 
     class asyncPujar extends AsyncTask<String,String,String> {
@@ -200,9 +151,6 @@ public class Mercado extends AppCompatActivity {
             presupuestoCompradorNuevo = params[1];
             idjugador= params[2];
             nuevoPrecio= params[3];
-
-            userAnterior = params[4];
-            devolucion = params[5];
             String respuesta = "ERROR1";
             //Para realizar la puja
             String urlPujar = setPujar(userComprador, idjugador,nuevoPrecio);
@@ -213,10 +161,6 @@ public class Mercado extends AppCompatActivity {
                 getHtml(urlPujar);
                 // Descontamos el valor de la puja al usuario
                 getHtml(urlDescontar);
-                // Si el usuario no es el sistema
-                if (!(userAnterior.equals("System"))){
-                    // DEVOLVER DINERO
-                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -241,9 +185,8 @@ public class Mercado extends AppCompatActivity {
         View v = inflater.inflate(R.layout.fichar, null);
 
         builder.setView(v);
-        final int precioActual = jugador.getPrecio()+100;
-        String precioActualStr = String.valueOf(precioActual);
-        final String anteriorPropietario = jugador.getOwner();
+        final int precioActual = jugador.getPrecio();
+        String precioActualStr = String.valueOf(precioActual+100);
         final EditText puja = (EditText) v.findViewById(R.id.editTextPuja);
         puja.setText(precioActualStr);
         final int id = jugador.getImagenId();
@@ -268,10 +211,8 @@ public class Mercado extends AppCompatActivity {
                                 String userComprador = getCurrentUser().getNombreUsuario();
                                 String presupuestoCompradorNuevo = String.valueOf(getCurrentUser().getDinero()-pujaActual);
                                 String idjugador = String.valueOf(id);
-                                String nuevoPrecio = String.valueOf(pujaActual/100);
-                                String userAnterior = anteriorPropietario;
-                                String devolucion = String.valueOf(precioActual);
-                                new asyncPujar().execute(userComprador,presupuestoCompradorNuevo,idjugador,nuevoPrecio,userAnterior, devolucion);
+                                String nuevoPrecio = String.valueOf(pujaActual);
+                                new asyncPujar().execute(userComprador,presupuestoCompradorNuevo,idjugador,nuevoPrecio);
                                 // Actualizamos en local el dinero actual
                                 getCurrentUser().setDinero(getCurrentUser().getDinero()-pujaActual);
                             }

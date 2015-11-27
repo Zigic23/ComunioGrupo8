@@ -3,6 +3,8 @@ package com.example.pdred.practicaps_final.Mercado;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,8 +21,12 @@ import com.example.pdred.practicaps_final.Clases.Jugador;
 import com.example.pdred.practicaps_final.R;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import static com.example.pdred.practicaps_final.Clases.Jugador.getImagen;
 import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.getHtml;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
@@ -54,7 +60,14 @@ public class RecyclerAdapterMercado extends RecyclerView.Adapter<RecyclerAdapter
         contactViewHolder.texto_nombre.setText(ju.getNombreJugador());
         contactViewHolder.texto_posicion.setText("Posicion: " + (ju.getPosicion()));
         contactViewHolder.texto_precio.setText("Precio: " + String.valueOf(ju.getPrecio()));
-        contactViewHolder.imagen_entrada.setImageResource(getImagen(ju.getImagenId()));
+        try {
+            Bitmap imagen = new asyncImagen().execute("http://st.comuniazo.com/img/players/"+ju.getImagenId()+".png").get();
+            contactViewHolder.imagen_entrada.setImageBitmap(imagen);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
 
         if (ju.getOwner().equals("System")) {
@@ -119,6 +132,41 @@ public class RecyclerAdapterMercado extends RecyclerView.Adapter<RecyclerAdapter
         }
     }
 
+    class asyncImagen extends AsyncTask<String,String,Bitmap> {
+        //Declaramos las variables que vamos a recoger
+        String url;
+        Bitmap imagen;
+        // PRE-EJECUCION: esto se ejecutara ANTES del background, en este caso muestra un dialogo de proceso y un mensaje que se puede editar
+        protected void onPreExecute(){
+        }
+        // EJECUCIÓN: Aqui va el codigo que se realizara en background
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            //Recoge los argumentos que le hemos pasado en la clase principal
+            url= params[0];
+            String respuesta = "ERROR1";
+            //Construye una url valida para hacer la consulta (Ver UtilidadesLogin)
+            imagen = DownloadImage(url);
+            //Devuelve como argumento el HTML o "ERROR1" (Devolvera "ERROR" si el usuario o contraseña son incorrectos)
+            return imagen;
+        }
+        //POST-EJECUCIÓN: Recoge lo que devuelve "doInBackground" y actua en funcion del resultado
+        protected void onPostExecute (Bitmap result){
+        }
+    }
+    private Bitmap DownloadImage(String imageHttpAddress){
+        URL imageUrl;
+        Bitmap imagen = null;
+        try{
+            imageUrl = new URL(imageHttpAddress);
+            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+            conn.connect();
+            imagen = BitmapFactory.decodeStream(conn.getInputStream());
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+        return imagen;
+    }
 
 
 }

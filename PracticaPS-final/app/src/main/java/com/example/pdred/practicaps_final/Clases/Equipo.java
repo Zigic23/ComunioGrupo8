@@ -96,7 +96,7 @@ public class Equipo {
         int juega = Integer.parseInt(jugadorItems[4].replace(" ", ""));
         String owner = jugadorItems[5].replace(" ","");
 
-        Jugador player = new Jugador(id, nombreJugador, posicion, precio * 100, juega, owner);
+        Jugador player = new Jugador(id, nombreJugador, posicion, precio, juega, owner);
         return player;
     }
 

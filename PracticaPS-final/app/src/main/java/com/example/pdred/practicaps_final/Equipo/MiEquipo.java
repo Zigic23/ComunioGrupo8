@@ -37,19 +37,9 @@ public class MiEquipo extends Fragment{
         v = inflater.inflate(R.layout.activity_equipo,container,false);
         listado = getCurrentUser().getEquipo().getListaJugadores();
 
-
         setAll(listado);
 
         return v;
-    }
-
-
-    public void onStop() {
-        // ESTO OCURRIRA CUANDO LA ACTIVIDAD DEJE DE SER VISIBLE AL USUARIO
-        super.onStop();
-        String user = getCurrentUser().getNombreUsuario();
-        String alineacion = getAlineacion().getIDs();
-        new asyncAlineacion().execute(user,alineacion);
     }
 
     public void setAll (ArrayList<Jugador> listac) {
@@ -60,19 +50,23 @@ public class MiEquipo extends Fragment{
         lista.setAdapter(adapter);
     }
 
+    public void onStop(){
+        super.onStop();
+        ActualizarOnce();
+    }
+
+    public void onPause(){
+        super.onPause();
+        ActualizarOnce();
+    }
+
     class asyncAlineacion extends AsyncTask<String,String,String> {
         //Declaramos las variables que vamos a recoger
         String user;
         String alineacion;
         ProgressDialog pDialog;
         // PRE-EJECUCION: esto se ejecutara ANTES del background, en este caso muestra un dialogo de proceso y un mensaje que se puede editar
-        protected void onPreExecute(){
-//            pDialog = new ProgressDialog(LoginActivity.this);
-//            pDialog.setMessage("Autenticando ...");
-//            pDialog.setIndeterminate(false);
-//            pDialog.setCancelable(true);
-//            pDialog.show();
-        }
+        protected void onPreExecute(){}
         // EJECUCIÓN: Aqui va el codigo que se realizara en background
         @Override
         protected String doInBackground(String... params) {
@@ -92,15 +86,14 @@ public class MiEquipo extends Fragment{
             return respuesta;
         }
         //POST-EJECUCIÓN: Recoge lo que devuelve "doInBackground" y actua en funcion del resultado
-        protected void onPostExecute (String result){
-            //Si el login es correcto, "result" sera "OK" y pasara a la siguiente activity
-//            if (result.equals("OK")){
-//                // Avanzamos al main
-//                Intent nuevaActividad;
-//                nuevaActividad = new Intent(LoginActivity.this, Inicio.class);
-//                startActivity(nuevaActividad);
-//            } else {err_login();} //En caso contrario sacara un error por pantalla
-//            pDialog.hide();
-       }
+        protected void onPostExecute (String result){}
     }
+
+    public void ActualizarOnce() {
+        String user = getCurrentUser().getNombreUsuario();
+        String alineacion = getAlineacion().getIDs();
+        new asyncAlineacion().execute(user,alineacion);
+    }
+
+
 }

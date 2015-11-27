@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,17 +17,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pdred.practicaps_final.Clases.Jugador;
+import com.example.pdred.practicaps_final.Mercado.Mercado;
 import com.example.pdred.practicaps_final.R;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static com.example.pdred.practicaps_final.Clases.Jugador.getImagen;
 import static com.example.pdred.practicaps_final.Equipo.AlineacionEquipo.refrescarView;
 import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.getHtml;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getAlineacion;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
+import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setAlineacion;
 import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setPresupuesto;
 import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setVender;
 
@@ -53,23 +60,34 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
         final Jugador ju = jugadores.get(i);
         contactViewHolder.vName.setText(ju.getNombreJugador());
         contactViewHolder.vPos.setText(ju.getPosicion());
-        contactViewHolder.vImagen.setImageResource(getImagen(ju.getImagenId()));
+        try {
+            Bitmap imagen = new asyncImagen().execute("http://st.comuniazo.com/img/players/"+ju.getImagenId()+".png").get();
+            contactViewHolder.vImagen.setImageBitmap(imagen);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
         if (ju.getJuega() == 1) {
             contactViewHolder.vBotonAdd.setImageResource(R.drawable.down);
-        }
+        }else{contactViewHolder.vBotonAdd.setImageResource(R.drawable.up);}
         contactViewHolder.vBotonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if ((ju).getJuega() == 0) {
-                    boolean introducido = getAlineacion().addJugador((ju));
                     (ju).setJuega(1);
+                    boolean introducido = getAlineacion().addJugador((ju));
                     if (introducido) {
                         contactViewHolder.vBotonAdd.setImageResource(R.drawable.down);
+                        ActualizarOnce();
                         Toast toast1 = Toast.makeText((mContext).getApplicationContext(), (ju).getNombreJugador() + " Convocado", Toast.LENGTH_SHORT);
                         toast1.show();
                     } else {
+                        (ju).setJuega(0);
                         Toast toast2 = Toast.makeText((mContext).getApplicationContext(), "Retire un jugador para insertar", Toast.LENGTH_SHORT);
                         toast2.show();
+
                     }
                     refrescarView();
                 } else {
@@ -78,32 +96,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
                         contactViewHolder.vBotonAdd.setImageResource(R.drawable.up);
                         Toast toast1 = Toast.makeText((mContext).getApplicationContext(), (ju).getNombreJugador() + " Desconvocado", Toast.LENGTH_SHORT);
                         toast1.show();
+                        (ju).setJuega(0);
+                        ActualizarOnce();
                     }
-                    (ju).setJuega(0);
                     refrescarView();
-                    //Toast toast3 = Toast.makeText((mContext).getApplicationContext(), "El jugador ya estaba convocado", Toast.LENGTH_SHORT);
-                    //toast3.show();
                 }
             }
         });
-
-
-        /**contactViewHolder.vBotonDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean eliminado = getAlineacion().removeJugador((ju));
-                (ju).setJuega(0);
-                if (eliminado) {
-                    Toast toast1 = Toast.makeText((mContext).getApplicationContext(), (ju).getNombreJugador() + " Desconvocado", Toast.LENGTH_SHORT);
-                    toast1.show();
-                } else {
-                    Toast toast1 = Toast.makeText((mContext).getApplicationContext(), "No estaba convocado", Toast.LENGTH_SHORT);
-                    toast1.show();
-                }
-                (ju).setJuega(0);
-                refrescarView();
-            }
-        });*/
 
         contactViewHolder.botonVender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +127,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
                         getAlineacion().removeJugador((ju));
                         Toast toast1 = Toast.makeText((mContext).getApplicationContext(), jugador.getNombreJugador() +" vendido", Toast.LENGTH_SHORT);
                         toast1.show();
+                        ActualizarOnce();
                         refrescarView();
                     }
                 });
@@ -140,6 +140,43 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
         });
     }
 
+    class asyncImagen extends AsyncTask<String,String,Bitmap> {
+        //Declaramos las variables que vamos a recoger
+        String url;
+        Bitmap imagen;
+        // PRE-EJECUCION: esto se ejecutara ANTES del background, en este caso muestra un dialogo de proceso y un mensaje que se puede editar
+        protected void onPreExecute(){
+        }
+        // EJECUCIÓN: Aqui va el codigo que se realizara en background
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            //Recoge los argumentos que le hemos pasado en la clase principal
+            url= params[0];
+            String respuesta = "ERROR1";
+            //Construye una url valida para hacer la consulta (Ver UtilidadesLogin)
+            imagen = DownloadImage(url);
+            //Devuelve como argumento el HTML o "ERROR1" (Devolvera "ERROR" si el usuario o contraseña son incorrectos)
+            return imagen;
+        }
+        //POST-EJECUCIÓN: Recoge lo que devuelve "doInBackground" y actua en funcion del resultado
+        protected void onPostExecute (Bitmap result){
+        }
+    }
+
+    private Bitmap DownloadImage(String imageHttpAddress){
+        URL imageUrl;
+        Bitmap imagen = null;
+        try{
+            imageUrl = new URL(imageHttpAddress);
+            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+            conn.connect();
+            imagen = BitmapFactory.decodeStream(conn.getInputStream());
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+        return imagen;
+    }
+
     @Override
     public PlayerHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).
@@ -148,15 +185,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
         return new PlayerHolder(itemView);
     }
 
-
+    public void ActualizarOnce() {
+        String user = getCurrentUser().getNombreUsuario();
+        String alineacion = getAlineacion().getIDs();
+        new asyncAlineacion().execute(user,alineacion);
+    }
 
     public class PlayerHolder extends RecyclerView.ViewHolder {
         protected TextView vName;
         protected TextView vPos;
         protected ImageView vImagen;
         protected ImageButton vBotonAdd;
-        protected ImageButton vBotonDel;
         protected ImageButton botonVender;
+        protected Bitmap loadedImage;
         public PlayerHolder(View v) {
             super(v);
             vName =  (TextView) v.findViewById(R.id.txtName);
@@ -164,8 +205,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
             vImagen = (ImageView) v.findViewById(R.id.imagenJugador1);
             vBotonAdd = (ImageButton) v.findViewById(R.id.add);
             botonVender = (ImageButton) v.findViewById(R.id.imageButton4);
+            //new asyncImagen().execute("http://estaticos.marca.com/iconos/v1.x/v1.0/fotos-apps/futbol/15-16/jugadores/18436.jpg");
 
         }
+
+
+
     }
 
     class asyncVender extends AsyncTask<String,String,String> {
@@ -204,4 +249,35 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
             refrescarView();
         }
     }
+
+    class asyncAlineacion extends AsyncTask<String,String,String> {
+        //Declaramos las variables que vamos a recoger
+        String user;
+        String alineacion;
+        ProgressDialog pDialog;
+        // PRE-EJECUCION: esto se ejecutara ANTES del background, en este caso muestra un dialogo de proceso y un mensaje que se puede editar
+        protected void onPreExecute(){}
+        // EJECUCIÓN: Aqui va el codigo que se realizara en background
+        @Override
+        protected String doInBackground(String... params) {
+            //Recoge los argumentos que le hemos pasado en la clase principal
+            user= params[0];
+            alineacion= params[1];
+            String respuesta = "ERROR1";
+            //Construye una url valida para hacer la consulta (Ver UtilidadesLogin)
+            String url = setAlineacion(user, alineacion);
+            try {
+                //Realiza la peticion al PHP, la respuesta nos da igual
+                getHtml(url);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //Devuelve como argumento el HTML o "ERROR1" (Devolvera "ERROR" si el usuario o contraseña son incorrectos)
+            return respuesta;
+        }
+        //POST-EJECUCIÓN: Recoge lo que devuelve "doInBackground" y actua en funcion del resultado
+        protected void onPostExecute (String result){}
+    }
+
+
 }
