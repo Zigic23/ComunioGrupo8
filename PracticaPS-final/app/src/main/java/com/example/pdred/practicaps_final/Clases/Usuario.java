@@ -31,23 +31,13 @@ public class Usuario {
     }
     
     public String getNombreUsuario(){return nombreUsuario;}
-    
-    public void setNombreUsuario(String s){nombreUsuario = s;}
 
     public String getNombreLiga(){
         return nombreLiga;
     }
     
-    public void setNombreLiga(String s){
-        nombreLiga = s;
-    }
-    
     public int getPuntos(){
         return puntos;
-    }
-    
-    public void setPuntos(int p){
-        puntos = p;
     }
 
     public Equipo getEquipo() {

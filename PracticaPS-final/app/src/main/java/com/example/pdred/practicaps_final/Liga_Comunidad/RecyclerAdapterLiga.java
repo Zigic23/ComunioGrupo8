@@ -28,22 +28,22 @@ import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setVen
 public class RecyclerAdapterLiga extends RecyclerView.Adapter<RecyclerAdapterLiga.PlayerHolder> {
 
 
-    private List<Usuario> jugadores;
+    private List<Usuario> usuarios;
 
     @Override
     public int getItemCount() {
-        return jugadores.size();
+        return usuarios.size();
     }
 
     public RecyclerAdapterLiga(ArrayList<Usuario> jug) {
-        this.jugadores = jug;
+        this.usuarios = jug;
     }
 
     @Override
     public void onBindViewHolder(PlayerHolder contactViewHolder, int i) {
-        final Usuario ju = jugadores.get(i);
-        contactViewHolder.texto_nombre.setText(ju.getNombreUsuario());
-        contactViewHolder.texto_puntos.setText("Puntos: " + String.valueOf(ju.getPuntos()));
+        final Usuario user = usuarios.get(i);
+        contactViewHolder.texto_nombre.setText(user.getNombreUsuario());
+        contactViewHolder.texto_puntos.setText("Puntos: " + String.valueOf(user.getPuntos()));
         contactViewHolder.imagen_entrada.setImageResource(R.drawable.sym_def_app_icon);
         if (i > 2) {
             contactViewHolder.imageRanked.setVisibility(View.INVISIBLE);

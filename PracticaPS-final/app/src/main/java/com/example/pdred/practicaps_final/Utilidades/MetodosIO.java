@@ -50,13 +50,9 @@ public class MetodosIO {
         // Leemos, como un String
         try (InputStream in = conexion.getInputStream()) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String primera = reader.readLine();
-            // Si la primera linea esta vacia, a fregar
-            if (!( primera == null)){
-                lineas.add(primera);
                 for (String line; (line = reader.readLine()) != null; ) {
                     lineas.add(i,line);
-                    i++;}}
+                    i++;}
         }catch (IOException e) {}
         return lineas;
     }
