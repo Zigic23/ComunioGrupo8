@@ -29,6 +29,7 @@ import java.util.concurrent.ExecutionException;
 
 import static com.example.pdred.practicaps_final.Clases.Jugador.getImagen;
 import static com.example.pdred.practicaps_final.Equipo.AlineacionEquipo.refrescarView;
+import static com.example.pdred.practicaps_final.Equipo.MiEquipo.refreshListado;
 import static com.example.pdred.practicaps_final.Login.UtilidadesLogin.getHtml;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getAlineacion;
 import static com.example.pdred.practicaps_final.UsuarioEstatico.getCurrentUser;
@@ -125,6 +126,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
                         getCurrentUser().getEquipo().getListaJugadores().remove(jugador);
                         getCurrentUser().setDinero(nuevoPresupuesto);
                         getAlineacion().removeJugador((ju));
+                        contactViewHolder.itemView.setVisibility(View.INVISIBLE);
+                        refreshListado();
                         Toast toast1 = Toast.makeText((mContext).getApplicationContext(), jugador.getNombreJugador() +" vendido", Toast.LENGTH_SHORT);
                         toast1.show();
                         ActualizarOnce();
@@ -205,12 +208,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
             vImagen = (ImageView) v.findViewById(R.id.imagenJugador1);
             vBotonAdd = (ImageButton) v.findViewById(R.id.add);
             botonVender = (ImageButton) v.findViewById(R.id.imageButton4);
-            //new asyncImagen().execute("http://estaticos.marca.com/iconos/v1.x/v1.0/fotos-apps/futbol/15-16/jugadores/18436.jpg");
-
         }
-
-
-
     }
 
     class asyncVender extends AsyncTask<String,String,String> {

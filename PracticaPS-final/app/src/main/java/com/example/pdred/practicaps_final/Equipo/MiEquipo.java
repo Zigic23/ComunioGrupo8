@@ -27,6 +27,7 @@ import static com.example.pdred.practicaps_final.Utilidades.UtilidadesURL.setAli
 
 public class MiEquipo extends Fragment{
     static ArrayList<Jugador> listado;
+    public static MiEquipo f;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager lManager;
     private View v;
@@ -36,9 +37,8 @@ public class MiEquipo extends Fragment{
 
         v = inflater.inflate(R.layout.activity_equipo,container,false);
         listado = getCurrentUser().getEquipo().getListaJugadores();
-
         setAll(listado);
-
+        f = this;
         return v;
     }
 
@@ -93,6 +93,10 @@ public class MiEquipo extends Fragment{
         String user = getCurrentUser().getNombreUsuario();
         String alineacion = getAlineacion().getIDs();
         new asyncAlineacion().execute(user,alineacion);
+    }
+
+    public static void refreshListado(){
+        f.setAll(listado);
     }
 
 

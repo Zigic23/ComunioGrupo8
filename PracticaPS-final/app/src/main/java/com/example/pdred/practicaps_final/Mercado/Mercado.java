@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pdred.practicaps_final.Clases.Jugador;
@@ -22,7 +23,9 @@ import com.example.pdred.practicaps_final.Main_Menu.Inicio;
 import com.example.pdred.practicaps_final.R;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 import static com.example.pdred.practicaps_final.Clases.Equipo.parsearJugadores;
@@ -123,6 +126,9 @@ public class Mercado extends AppCompatActivity {
     }
 
     public void setAll (ArrayList<Jugador> listac) {
+
+        TextView titulo = (TextView) findViewById(R.id.editTextMercado);
+        titulo.setText("Las pujas acaban el: "+calcNextMonday());
         final LinearLayoutManager lManager = new LinearLayoutManager(this);
         lManager.setOrientation(LinearLayoutManager.VERTICAL);
         listView44.setLayoutManager(lManager);
@@ -234,4 +240,21 @@ public class Mercado extends AppCompatActivity {
         );
         return builder.create();
     }
+
+    private String calcNextMonday() {
+        Calendar today = Calendar.getInstance();
+        int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
+        int daysUntilNextFriday = Calendar.MONDAY - dayOfWeek;
+        if(daysUntilNextFriday < 0){
+            daysUntilNextFriday = daysUntilNextFriday + 7;
+        }
+        Calendar nextFriday = (Calendar)today.clone();
+        nextFriday.add(Calendar.DAY_OF_WEEK, daysUntilNextFriday);
+        if(nextFriday.get(Calendar.WEEK_OF_YEAR) % 2 == 0){
+            nextFriday.add(Calendar.DAY_OF_WEEK, 7);
+        }
+        return new SimpleDateFormat("dd/MM/yyyy").format(nextFriday.getTime());
+    }
+
+
 }
