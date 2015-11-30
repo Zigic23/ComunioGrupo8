@@ -50,10 +50,27 @@ public class RecyclerAdapterLiga extends RecyclerView.Adapter<RecyclerAdapterLig
         } else {
             if (i == 1) {
                 contactViewHolder.imageRanked.setImageResource(R.drawable.plata);
+                contactViewHolder.imagen_entrada.setImageResource(R.drawable.jm);
             }
             if (i == 2) {
                 contactViewHolder.imageRanked.setImageResource(R.drawable.bronze);
+                contactViewHolder.imagen_entrada.setImageResource(R.drawable.cs);
             }
+        }
+        if (i == 0) {
+            contactViewHolder.imagen_entrada.setImageResource(R.drawable.rb);
+        }
+        if (i == 3) {
+            contactViewHolder.imagen_entrada.setImageResource(R.drawable.ca);
+        }
+        if (i == 4) {
+            contactViewHolder.imagen_entrada.setImageResource(R.drawable.jk);
+        }
+        if (i == 5) {
+            contactViewHolder.imagen_entrada.setImageResource(R.drawable.jg);
+        }
+        if (i == 6) {
+            contactViewHolder.imagen_entrada.setImageResource(R.drawable.af);
         }
 
     }
