@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 import static com.example.pdred.practicaps_final.Clases.Equipo.parsearJugadores;
@@ -129,6 +130,13 @@ public class Mercado extends AppCompatActivity {
 
         TextView titulo = (TextView) findViewById(R.id.editTextMercado);
         titulo.setText("Las pujas acaban el: "+calcNextMonday());
+        Date ahora = new Date();
+        SimpleDateFormat formateador2 = new SimpleDateFormat("yyyy");
+        TextView anyo = (TextView) findViewById(R.id.anyo);
+        anyo.setText(formateador2.format(ahora));
+        SimpleDateFormat formateador = new SimpleDateFormat("EEE, MMM d");
+        TextView fecha = (TextView) findViewById(R.id.fecha);
+        fecha.setText(formateador.format(ahora));
         final LinearLayoutManager lManager = new LinearLayoutManager(this);
         lManager.setOrientation(LinearLayoutManager.VERTICAL);
         listView44.setLayoutManager(lManager);
